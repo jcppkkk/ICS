@@ -1,0 +1,28 @@
+第一次使用：
+    ===========================
+    git設定檔：
+    cat ~/.gitconfig
+
+    [user]
+            name = 尚哲
+            email = comet.jc@gmail.com
+    [color]
+            pager = true
+            ui = true
+    [core]
+        pager = less -FRSX
+        editor = vim
+    [merge]
+        tool = vimdiff
+    ===========================
+    使用Git與Github管理軟體開發專案.
+        http://billy3321.blogspot.com/2009/02/github-howto.html
+    http://edgyu.excess.org/git-tutorial/2008-07-09/intro-to-git.pdf
+
+關於git的其他資料
+    Why Git is Better Than X
+        http://zh-tw.whygitisbetterthanx.com/#any-workflow
+    Git 版本控制系統(2) 開 branch 分支和操作遠端 repo.
+        http://ihower.idv.tw/blog/archives/2620
+
+
