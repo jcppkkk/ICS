@@ -1,0 +1,85 @@
+MYSQL DATABASE SETUP
+
+1. Create a database and call it whatever you want
+2. Execute the code below to create your database table and fields
+
+CREATE TABLE users (
+user_id INT UNSIGNED NOT NULL AUTO_INCREMENT,
+first_name VARCHAR(20) NOT NULL,
+last_name VARCHAR(40) NOT NULL,
+email VARCHAR(80) NOT NULL,
+pass CHAR(40) NOT NULL,
+user_level TINYINT(1) UNSIGNED NOT NULL DEFAULT 0,
+active CHAR(32),
+registration_date DATETIME NOT NULL,
+PRIMARY KEY (user_id),
+UNIQUE KEY (email),
+INDEX login (email, pass)
+);
+
+
+
+
+
+FILE CHANGES ARE BELOW
+---------------------------------------------------
+FILE - config.inc.php
+
+1. Change Line 15 to read
+define('LIVE', TRUE);
+2. Add your own email address on line 18
+3. Line 21 - Change this to the address the user will be directed to if they try to access a protected page and they are not logged in.
+4. Line 55 - Change this to your own email address.
+
+FILE - forgot_password.php
+1. Line 43 - Add your own website address here
+2. Line 44 - Change the email to your own email
+
+FILE - mysqli_connect.php
+1. Enter your own Database Name, User Name, Password, and DB_Host
+
+FILE - register.php
+1. Line 70 Add your own website address
+2. Line 72 Add your own email address
+
+--------------------------------------------------------
+CODE TO ADD TO YOUR PAGES TO PASSWORD PROTECT THEM
+---ADD THE CODE BELOW TO THE VERY BEGINNING OF THE PAGE YOUR WANT TO PASSWORD PROTECT---
+
+<?php 
+require_once ('includes/config.inc.php'); 
+$page_title = 'YOUR PAGE TITLE GOES HERE';
+
+// Start output buffering:
+ob_start();
+
+// Initialize a session:
+session_start();
+
+// Check for a $page_title value:
+if (!isset($page_title)) {
+	$page_title = 'User Registration';
+}
+
+// If no first_name session variable exists, redirect the user:
+if (!isset($_SESSION['first_name'])) {
+	
+	$url = BASE_URL . 'index.php'; // Define the URL.
+	ob_end_clean(); // Delete the buffer.
+	header("Location: $url");
+	exit(); // Quit the script.
+	
+}
+?>
+
+-----ADD THIS CODE TO THE VERY END OF THE PAGE YOU ARE PASSWORD PROTECTING----
+
+<?php // Flush the buffered output.
+ob_end_flush();
+?>
+
+
+
+
+
+
