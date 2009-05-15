@@ -8,10 +8,10 @@
         http://billy3321.blogspot.com/2009/02/github-howto.html
 
     複製.git/.gitconfig 到 ~/.gitconfig 並修改內容
+    git clone git@github.com:<您的ID>/test.git test
     git remote add kero git://github.com/kero033/ICS.git
     git remote add che git://github.com/jcppkkk/ICS.git
     git remote add hkegbert git://github.com/hkegbert/ICS.git
-    git clone git@github.com:<您的ID>/test.git test
 
     git fetch 把遠端的 branch 更新下載回來，但不會 merge 到 local branch
     git branch -r 顯示 local 有追蹤的遠端 branch。注意到你不能直接修改這個 remote branch，一定要用一個 local branch 對應它。
@@ -29,5 +29,13 @@ Git 版本控制系統(1)
     http://ihower.idv.tw/blog/archives/2591
 Git 版本控制系統(2) 開 branch 分支和操作遠端 repo.
     http://ihower.idv.tw/blog/archives/2620
+
+//常用低
+git push //丟到original
+git pull //抓original
+git add filename //
+git commit -a -m"message" //所有改變
+git commit -m"message" //對剛剛add做修正
+
 
 </pre></body>
