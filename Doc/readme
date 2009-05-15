@@ -1,6 +1,8 @@
 第一次使用：
     複製.git/.gitconfig 到 ~/.gitconfig 並修改內容
     git remote add kero git://github.com/kero033/ICS.git
+    git remote add che git://github.com/jcppkkk/ICS.git
+    git clone git@github.com:<您的ID>/test.git test
 
     git fetch 把遠端的 branch 更新下載回來，但不會 merge 到 local branch
     git branch -r 顯示 local 有追蹤的遠端 branch。注意到你不能直接修改這個 remote branch，一定要用一個 local branch 對應它。
