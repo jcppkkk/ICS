@@ -6,6 +6,9 @@
 </head>
 
 <body>
+<?php
+print_r($_POST);
+?>
 <form  method="post" action="">
   <table border="1">
   <tr>
