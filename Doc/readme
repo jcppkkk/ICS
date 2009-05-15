@@ -1,28 +1,21 @@
 第一次使用：
-    ===========================
-    git設定檔：
-    cat ~/.gitconfig
+    複製.git/.gitconfig 到 ~/.gitconfig 並修改內容
+    git remote add kero git://github.com/kero033/ICS.git
 
-    [user]
-            name = 尚哲
-            email = comet.jc@gmail.com
-    [color]
-            pager = true
-            ui = true
-    [core]
-        pager = less -FRSX
-        editor = vim
-    [merge]
-        tool = vimdiff
-    ===========================
-    使用Git與Github管理軟體開發專案.
-        http://billy3321.blogspot.com/2009/02/github-howto.html
-    http://edgyu.excess.org/git-tutorial/2008-07-09/intro-to-git.pdf
+    git fetch 把遠端的 branch 更新下載回來，但不會 merge 到 local branch
+    git branch -r 顯示 local 有追蹤的遠端 branch。注意到你不能直接修改這個 remote branch，一定要用一個 local branch 對應它。
+    git remote show origin 顯示遠端 server 的 branch
+    git remote add foobar git:// 可以新增別的 repo. 位置，於是 pull 的時候就可以指定要從哪一個遠端更新回來。
+    git push origin :foobar 刪除遠端的 branch
 
-關於git的其他資料
-    Why Git is Better Than X
-        http://zh-tw.whygitisbetterthanx.com/#any-workflow
-    Git 版本控制系統(2) 開 branch 分支和操作遠端 repo.
-        http://ihower.idv.tw/blog/archives/2620
+文件：
+使用Git與Github管理軟體開發專案.
+    http://billy3321.blogspot.com/2009/02/github-howto.html
 
+http://edgyu.excess.org/git-tutorial/2008-07-09/intro-to-git.pdf
 
+Why Git is Better Than X
+    http://zh-tw.whygitisbetterthanx.com/#any-workflow
+
+Git 版本控制系統(2) 開 branch 分支和操作遠端 repo.
+    http://ihower.idv.tw/blog/archives/2620

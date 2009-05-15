@@ -1,0 +1,11 @@
+[user]
+    name = 尚哲
+    email = comet.jc@gmail.com
+[color]
+    pager = true
+    ui = true
+[core]
+    pager = less -FRSX
+    editor = vim
+[merge]
+    tool = vimdiff
