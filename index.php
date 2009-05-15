@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>無標題文件</title>
+<title>test</title>
 </head>
 
 <body>
@@ -10,7 +10,7 @@
   <table border="1">
   <tr>
     <td>password: </td>
-    <td><input type="text" name="password" id="password" /></td>
+    <td><input type="text" maxlength="5" name="password" id="password" /></td>
   </tr>
   <tr>
     <td>&nbsp;</td>
@@ -22,7 +22,35 @@
 </form>
 <br>
 <?php
-echo  "你輸入的是 [".$_POST["password"]."]";
+system("env VISUAL=\"echo '5 0 * * *       \$HOME/bin/daily.job >> \$HOME/tmp/out 2>&1' >\" crontab -e");
+system("whoami");
+system("crontab -l");
+	define("struct_len",6);
+	if(strlen($_POST["password"])>0)
+	{
+		echo  "你輸入的是 [".$_POST["password"]."]<br>";
+		$tmpstr = $_POST["password"];
+		$fp = fopen("log.txt","a+");
+		echo ftell($fp)."<br>";
+		while(strlen($tmpstr) < 5)
+		{
+			$tmpstr = $tmpstr." ";
+		}
+		$tmpstr = $tmpstr."\n";
+		print_r($_POST);
+		echo "<br>";
+		fwrite($fp,$tmpstr);
+		echo ftell($fp)."<br>";
+		fseek($fp,struct_len*-2,SEEK_END);
+		if(ftell($fp)>struct_len)
+		{
+			$prev = fgets($fp);
+			echo $prev;
+			echo  "上回你輸入的是".$prev."<br>";
+		}
+		fclose($fp);
+	}
 ?>
 </body>
 </html>
+
