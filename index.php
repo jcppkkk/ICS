@@ -23,6 +23,7 @@ if ($content) {
     }
     fclose($content);
 }
+print_r($_POST);
 ?>
 <form  method="post" action="">
   <table border="1">
