@@ -86,7 +86,7 @@ git checkout -b hkegbert hkegbert/master
 
 
 
-往後要合併他人master到自己的master branch以kero為例(需要之前 4.的設定)
+往後要合併單人的master branch，以kero為例(需要之前 4.的設定)
 --------
 
 git checkout kero
@@ -94,6 +94,16 @@ git pull
 git checkout master
 git merge kero
 
+
+合併所有人的branch(要去掉自己)
+--------
+git co kero; git pull
+git co che; git pull
+git co moon; git pull
+git co weeseng; git pull
+git co hkegbert; git pull
+git co master
+git merge kero che moon weeseng hkegbert
 
 有conflict產生時
 --------
