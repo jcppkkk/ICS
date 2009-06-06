@@ -14,16 +14,18 @@ $condfile=".UIconfig";
     fclose($content);
 }*/
 
-$content = @fopen($condfile, "r") or
-    die("fopen error");
+$content = @fopen($condfile, "r") or die("fopen error");
 $shellcmd="";
-if ($content) {
-    while (!feof($content)) {
+if ($content)
+{
+    while (!feof($content))
+    {
         $shellcmd+=fgets($content, 4096);
     }
     fclose($content);
 }
 print_r($_POST);
+
 ?>
 <form  method="post" action="">
   <table border="1">
