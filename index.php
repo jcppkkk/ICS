@@ -6,25 +6,25 @@
 </head>
 <body>
 <?php
-$condfile=".UIconfig";
-/*if(isset($_POST["shellcmd"])){
-    $content = @fopen($condfile, "w") or
-        die("fopen erro1r");
+$CONFIG_FILE=".UIconfig";
+
+/* save the POST */
+if(isset($_POST["shellcmd"])){
+    $content = @fopen($CONFIG_FILE, "w") or die("fopen write error");
     fputs($content, $_POST["shellcmd"]);
     fclose($content);
-}*/
-
-$content = @fopen($condfile, "r") or die("fopen error");
-$shellcmd="";
-if ($content)
-{
-    while (!feof($content))
-    {
-        $shellcmd+=fgets($content, 4096);
-    }
-    fclose($content);
 }
-print_r($_POST);
+
+/* read config */
+$content = @fopen($CONFIG_FILE, "r") or die("fopen read error");
+$shellcmd="";
+while (!feof($content))
+{
+    $line = fgets($content, 4096);
+    $shellcmd=$shellcmd.$line;
+}
+fclose($content);
+print_r($shellcmd);
 
 ?>
 <form  method="post" action="">
