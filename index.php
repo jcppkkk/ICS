@@ -1,3 +1,37 @@
+<?php
+/* print the contents of a url */
+function print_r_xml($arr,$wrapper = 'data',$cycle = 1)
+{
+    //useful vars
+    $new_line = "\n";
+
+    //start building content
+    if($cycle == 1) { $output = '<?xml version="1.0" encoding="UTF-8" ?>'.$new_line; }
+    $output.= tabify($cycle - 1).'<'.$wrapper.'>'.$new_line;
+    foreach($arr as $key => $val)
+    {
+        if(!is_array($val))
+        {
+            $output.= tabify($cycle).'<'.htmlspecialchars($key).'>'.$val.'</'.htmlspecialchars($key).'>'.$new_line;
+        }
+        else
+        {
+            $output.= print_r_xml($val,$key,$cycle + 1).$new_line;
+        }
+    }
+    $output.= tabify($cycle - 1).'</'.$wrapper.'>';
+
+    //return the value
+    return $output;
+}
+
+/* tabify */
+function tabify($num_tabs)
+{
+    for($x = 1; $x <= $num_tabs; $x++) { $return.= "\t"; }
+    return $return;
+}
+?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html>
 <head>
@@ -5,6 +39,12 @@
 <title>test</title>
 </head>
 <body>
+<pre>
+<?php
+print_r($_POST);
+echo print_r_xml($_POST);
+?>
+</pre>
 <?php
 $CONFIG_FILE=".UIconfig";
 
@@ -13,8 +53,12 @@ if(isset($_POST["shellcmd"])){
     $content = @fopen($CONFIG_FILE, "w") or die("fopen write error");
     fputs($content, $_POST["shellcmd"]);
     fclose($content);
-}
 
+    /* test  */
+    //$fp = fopen("row.xml", 'w+') or die("I could not open row.xml.");
+    //fwrite($fp, serialize($_POST));
+    //fclose($fp);
+}
 /* read config */
 $content = @fopen($CONFIG_FILE, "r") or die("fopen read error");
 $shellcmd="";
@@ -28,6 +72,9 @@ print_r($shellcmd);
 
 ?>
 <form  method="post" action="">
+<input type="hidden" name="task[1][time]" value=1988/01/01 />
+<input type="hidden" name="task[2][time]" value=1988/01/01 />
+<input type="hidden" name="task[3][time]" value=1988/01/01 />
   <table border="1">
     <tr>
       <td>目前指令</td>
@@ -35,8 +82,8 @@ print_r($shellcmd);
     </tr>
     <tr>
       <td>變更:執行指令</td>
-      <td><input type="text" name="shellcmd" id="shellcmd" />
-        <input type="submit" name="submit" id="submit" value="送出" /></td>
+      <td><input type="text" name="shellcmd" />
+        <input type="submit" name="submit" value="送出" /></td>
     </tr>
   </table>
 </form>
