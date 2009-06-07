@@ -3,36 +3,12 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>test</title>
+<script type="text/javascript" src="./js/jquery-dynamic-form.js"></script>
 </head>
 <body>
-<?php
-print_r($_POST);
-$condfile=".UIconfig";
-/*if(isset($_POST["shellcmd"])){
-    $content = @fopen($condfile, "w") or
-        die("fopen erro1r");
-    fputs($content, $_POST["shellcmd"]);
-    fclose($content);
-}*/
-
-$content = @fopen($condfile, "r") or die("fopen error");
-$shellcmd="";
-if ($content)
-{
-    while (!feof($content))
-    {
-        $shellcmd+=fgets($content, 4096);
-    }
-    fclose($content);
-}
-//print_r($_POST);
-
-?>
-<form  method="post" action="">
+<form name="input_form" id="input_form"  method="post" action="">
   <table border="1">
     <tr>
-      <td>目前指令</td>
-      <td><?php echo $shellcmd; ?></td>
 	<td>分</td>
 	<td>
 	<SELECT NAME="minute_shellcmd">
