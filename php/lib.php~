@@ -1,5 +1,5 @@
 <?php
-$CONFIG_DIR="coretask";
+$CONFIG_DIR=".UIconfig";
 $CONFIG_CACHE="php/.UIcache";
 
 /* 增加POST "+" id:time()*/
