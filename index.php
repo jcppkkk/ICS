@@ -6,9 +6,7 @@
 </head>
 <body>
 <?php
-<<<<<<< HEAD:index.php
 print_r($_POST);
-=======
 $condfile=".UIconfig";
 /*if(isset($_POST["shellcmd"])){
     $content = @fopen($condfile, "w") or
@@ -17,22 +15,70 @@ $condfile=".UIconfig";
     fclose($content);
 }*/
 
-$content = @fopen($condfile, "r") or
-    die("fopen error");
+$content = @fopen($condfile, "r") or die("fopen error");
 $shellcmd="";
-if ($content) {
-    while (!feof($content)) {
+if ($content)
+{
+    while (!feof($content))
+    {
         $shellcmd+=fgets($content, 4096);
     }
     fclose($content);
 }
->>>>>>> b463fe65beb11ba5af5ca251770012a206c0f282:index.php
+//print_r($_POST);
+
 ?>
 <form  method="post" action="">
   <table border="1">
     <tr>
       <td>目前指令</td>
       <td><?php echo $shellcmd; ?></td>
+	<td>分</td>
+	<td>
+	<SELECT NAME="minute_shellcmd">
+		<?php
+			for($i=1;$i<61;$i++)
+			{echo "<OPTION VALUE ='".$i."'>".$i."</OPTION>\n";}
+		?>
+	</SELECT>
+	</td>
+	<td>時</td>
+	<td>
+	<SELECT NAME="hour_shellcmd">
+		<?php
+			for($i=0;$i<24;$i++)
+			{echo "<OPTION VALUE ='".$i."'>".$i."</OPTION>\n";}
+		?>
+	</SELECT>
+	</td>
+	<td>日</td>
+	<td>
+	<SELECT NAME="day_shellcmd">
+		<?php
+			for($i=1;$i<32;$i++)
+			{echo "<OPTION VALUE ='".$i."'>".$i."</OPTION>\n";}
+		?>
+	</SELECT>
+	</td>
+	<td>月</td>
+	<td>
+	<SELECT NAME="month_shellcmd">
+		<?php
+			for($i=1;$i<13;$i++)
+			{echo "<OPTION VALUE ='".$i."'>".$i."</OPTION>\n";}
+		?>
+	</SELECT>
+	</td>
+	<td>星期</td>
+	<td>
+	<SELECT NAME="week_shellcmd">
+		<?php
+			for($i=1;$i<7;$i++)
+			{echo "<OPTION VALUE ='".$i."'>".$i."</OPTION>\n";}
+		?>
+		<OPTION VALUE ='7'>日</OPTION>
+	</SELECT>
+	</td>
     </tr>
     <tr>
       <td>變更:執行指令</td>

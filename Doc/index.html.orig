@@ -2,6 +2,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 </head>
 <body><pre>
+<<<<<<< HEAD:Doc/index.html
 第一次使用：
     https://github.com/
     使用Git與Github管理軟體開發專案.
@@ -13,11 +14,8 @@
     git remote add che git://github.com/jcppkkk/ICS.git
     git remote add moon git://github.com/Moonloki/ICS.git
     git remote add hkegbert git://github.com/hkegbert/ICS.git
-<<<<<<< HEAD:Doc/index.html
-=======
     git remote add weeseng git://github.com/weeseng/ICS.git
     git clone git@github.com:<您的ID>/test.git test
->>>>>>> ceab60755d55349135e354d1f802994cdf79c6e3:Doc/index.html
 
     git fetch 把遠端的 branch 更新下載回來，但不會 merge 到 local branch
     git branch -r 顯示 local 有追蹤的遠端 branch。注意到你不能直接修改這個 remote branch，一定要用一個 local branch 對應它。
@@ -35,6 +33,18 @@ Git 版本控制系統(1)
     http://ihower.idv.tw/blog/archives/2591
 Git 版本控制系統(2) 開 branch 分支和操作遠端 repo.
     http://ihower.idv.tw/blog/archives/2620
+=======
+
+//文件
+GIT首頁                             https://github.com/
+使用Git與Github(第一次照著做)       http://billy3321.blogspot.com/2009/02/github-howto.html
+好用pdf(有實際使用情境示範)         http://edgyu.excess.org/git-tutorial/2008-07-09/intro-to-git.pdf
+git cheat sheet (小抄，內容豐富)    http://cheat.errtheblog.com/s/git
+Why Git is Better(圖片明瞭易懂)     http://zh-tw.whygitisbetterthanx.com/#any-workflow
+Git 版本控制系統(1) (中文介紹)      http://ihower.idv.tw/blog/archives/2591
+Git 版本控制系統(2)
+    開 branch 分支和操作遠端 repo.  http://ihower.idv.tw/blog/archives/2620
+>>>>>>> 6de72fc78b9040a452452f55d620f6e341636089:Doc/index.html
 
 //常用低
 git push //丟到original
@@ -42,6 +52,95 @@ git pull //抓original
 git add filename //
 git commit -a -m"message" //所有改變
 git commit -m"message" //對剛剛add做修正
+git fetch 把遠端的 branch 更新下載回來，但不會 merge 到 local branch
+git branch -r 顯示 local 有追蹤的遠端 branch。注意到你不能直接修改這個 remote branch，一定要用一個 local branch 對應它。
+git remote show origin 顯示遠端 server 的 branch
+git remote add foobar git:// 可以新增別的 repo. 位置，於是 pull 的時候就可以指定要從哪一個遠端更新回來。
+git push origin :foobar 刪除遠端的 branch
 
+
+1.安裝git：
+--------
+
+git clone git@github.com:你的git_ID/ICS.git
+    複製你的git repo.到本地端
+
+2.設定
+--------
+
+git config i18n.commitencoding utf-8
+git config --global user.name 名子
+git config --global user.email 電子郵件
+git config --global core.pager 'less -FRSX'
+git config --global core.editor vim
+git config --global merge.tool vimdiff
+git config --global branch.autosetupmerge true
+git config --global alias.st status
+git config --global alias.ci commit
+git config --global alias.br branch
+git config --global alias.co checkout
+git config --global alias.df diff
+git config --global alias.lg 'log -p'
+git config --global color.ui auto
+git config --global color."branch".current 'yellow reverse'
+git config --global color."branch".local yellow
+git config --global color."branch".remote green
+git config --global color."diff".meta 'yellow bold'
+git config --global color."diff".frag 'magenta bold'
+git config --global color."diff".old 'red bold'
+git config --global color."diff".new 'green bold'
+git config --global color."status".added yellow
+git config --global color."status".changed green
+git config --global color."status".untracked cyan
+
+
+3.加入大家的Repository (自己不用)
+--------
+
+git remote add kero git://github.com/kero033/ICS.git
+git remote add che git://github.com/jcppkkk/ICS.git
+git remote add moon git://github.com/Moonloki/ICS.git
+git remote add hkegbert git://github.com/hkegbert/ICS.git
+git remote add weeseng git://github.com/weeseng/ICS.git
+
+
+4.將每個人的master branch對應成本地branch (自己不用)
+--------
+
+git checkout -b kero kero/master
+git checkout -b che che/master
+git checkout -b moon moon/master
+git checkout -b weeseng weeseng/master
+git checkout -b hkegbert hkegbert/master
+
+
+這樣就算是初期安裝完畢了
+--------------------------
+
+
+
+往後要合併單人的master branch，以kero為例(需要之前 4.的設定)
+--------
+
+git checkout kero
+git pull
+git checkout master
+git merge kero
+
+
+合併所有人的branch(要去掉自己)
+--------
+git co kero; git pull
+git co che; git pull
+git co moon; git pull
+git co weeseng; git pull
+git co hkegbert; git pull
+git co master
+git merge kero che moon weeseng hkegbert
+
+有conflict產生時
+--------
+git mergetool
 
 </pre></body>
+
