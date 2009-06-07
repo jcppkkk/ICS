@@ -1,0 +1,3 @@
+setenv VISUAL "cat test >"
+setenv VISUAL "echo '5 0 * * *       $HOME/bin/daily.job >> $HOME/tmp/out 2>&1' >"
+setenv VISUAL vim

@@ -9,10 +9,10 @@
 require_once("php/lib.php");
 createDiff($_POST);
 #print_r($_POST);
-#saveCache($_POST);
-#$b = getCache();
+saveCache($_POST);
+$b = getCache();
 #echo "<br>after----------------------------------------<br>";
-print_r($b);
+#print_r($b);
 ?>
 
 <form  method="post" action="">
@@ -46,6 +46,52 @@ print_r($b);
     <tr>
       <td>目前指令</td>
       <td><?php echo $shellcmd; ?></td>
+	<td>分</td>
+	<td>
+	<SELECT NAME="minute_shellcmd">
+		<?php
+			for($i=1;$i<61;$i++)
+			{echo "<OPTION VALUE ='".$i."'>".$i."</OPTION>\n";}
+		?>
+	</SELECT>
+	</td>
+	<td>時</td>
+	<td>
+	<SELECT NAME="hour_shellcmd">
+		<?php
+			for($i=0;$i<24;$i++)
+			{echo "<OPTION VALUE ='".$i."'>".$i."</OPTION>\n";}
+		?>
+	</SELECT>
+	</td>
+	<td>日</td>
+	<td>
+	<SELECT NAME="day_shellcmd">
+		<?php
+			for($i=1;$i<32;$i++)
+			{echo "<OPTION VALUE ='".$i."'>".$i."</OPTION>\n";}
+		?>
+	</SELECT>
+	</td>
+	<td>月</td>
+	<td>
+	<SELECT NAME="month_shellcmd">
+		<?php
+			for($i=1;$i<13;$i++)
+			{echo "<OPTION VALUE ='".$i."'>".$i."</OPTION>\n";}
+		?>
+	</SELECT>
+	</td>
+	<td>星期</td>
+	<td>
+	<SELECT NAME="week_shellcmd">
+		<?php
+			for($i=1;$i<7;$i++)
+			{echo "<OPTION VALUE ='".$i."'>".$i."</OPTION>\n";}
+		?>
+		<OPTION VALUE ='7'>日</OPTION>
+	</SELECT>
+	</td>
     </tr>
     <tr>
       <td>變更:執行指令</td>
