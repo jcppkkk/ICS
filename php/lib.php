@@ -1,45 +1,39 @@
 <?php
 $CONFIG_DIR=".UIconfig";
-$CONFIG_CACHE=".UIcache";
+$CONFIG_CACHE="php/.UIcache";
 
 /* 增加POST "+" id:time()*/
 /* 儲存 CONFIG_DIR/time() */
-/* 修改POST */
-/* 儲存 CONFIG_CACHE */
-function handlePOST()
+function createDiff()
 {
-    global $CONFIG_DIR, $CONFIG_CACHE;
-    if(isset($_POST["shellcmd"]))
-    {
-        /* 增加POST "+" id:time()*/
-        /* 儲存 CONFIG_DIR/time() */
-        print_r($POST);
-        chmod("$CONFIG_DIR/buffer.txt", 0666);
-        ob_list_handlers();
-        print_r($POST);
-        $buffer = ob_get_flush();
-        file_put_contents("$CONFIG_DIR/buffer.txt", $buffer);
+    global $CONFIG_DIR;
+    $diff=$CONFIG_DIR."/".time();
+    ob_start();
+    print_r($_POST);
+    $output = ob_get_contents();
+    ob_end_clean();
 
-        /* 修改POST */
-        /* 儲存 CONFIG_CACHE */
-        $content = @fopen($CONFIG_CACHE, "w+") or die("fopen write error");
-        fputs($content, $_POST);
-        fclose($content);
-    }
+    $fp = fopen($diff, "w");
+    fwrite($fp,$output);
+    fclose($fp);
+    chmod($diff, 0666);
 }
-/* read config */
-function readCatch()
+
+/* 修改POST */
+# save POST to file
+function saveCache($a)
 {
-    global $CONFIG_DIR, $CONFIG_CACHE;
-    $config = @fopen($CONFIG_CACHE, "r") or die("fopen read error");
-    $shellcmd="";
-    while (!feof($config))
-    {
-        $line = fgets($config, 4096);
-        $shellcmd=$shellcmd.$line;
-    }
-    fclose($config);
-    print_r($config);
+    global $CONFIG_CACHE;
+    $fp = fopen($CONFIG_CACHE, "w+") or die("I could not open $CONFIG_CACHE");
+    fwrite($fp, serialize($a));
+    fclose($fp);
+}
+
+# retrieve from file
+function getCache()
+{
+    global $CONFIG_CACHE;
+    return unserialize(file_get_contents($CONFIG_CACHE));
 }
 
 ?>

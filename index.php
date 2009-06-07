@@ -6,9 +6,13 @@
 </head>
 <body>
 <?php
-require_once("lib.php");
-handlePOST();
-readCatch();
+require_once("php/lib.php");
+createDiff($_POST);
+#print_r($_POST);
+#saveCache($_POST);
+#$b = getCache();
+#echo "<br>after----------------------------------------<br>";
+print_r($b);
 ?>
 
 <form  method="post" action="">
