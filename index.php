@@ -4,6 +4,15 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>test</title>
 <script type="text/javascript" src="./js/jquery-dynamic-form.js"></script>
+<style type="text/css">
+
+div#task_cmd {
+   width: 100px;
+   height: 100px;
+   background-color: red;
+}
+
+</style>
 </head>
 <body>
 <?php
@@ -16,61 +25,20 @@ $b = getCache();
 #print_r($b);
 ?>
 <form name="input_form" id="input_form"  method="post" action="">
-  <table border="1">
-    <tr>
-	<td>分</td>
-	<td>
-	<SELECT NAME="minute_shellcmd">
-		<?php
-			for($i=1;$i<61;$i++)
-			{echo "<OPTION VALUE ='".$i."'>".$i."</OPTION>\n";}
-		?>
-	</SELECT>
-	</td>
-	<td>時</td>
-	<td>
-	<SELECT NAME="hour_shellcmd">
-		<?php
-			for($i=0;$i<24;$i++)
-			{echo "<OPTION VALUE ='".$i."'>".$i."</OPTION>\n";}
-		?>
-	</SELECT>
-	</td>
-	<td>日</td>
-	<td>
-	<SELECT NAME="day_shellcmd">
-		<?php
-			for($i=1;$i<32;$i++)
-			{echo "<OPTION VALUE ='".$i."'>".$i."</OPTION>\n";}
-		?>
-	</SELECT>
-	</td>
-	<td>月</td>
-	<td>
-	<SELECT NAME="month_shellcmd">
-		<?php
-			for($i=1;$i<13;$i++)
-			{echo "<OPTION VALUE ='".$i."'>".$i."</OPTION>\n";}
-		?>
-	</SELECT>
-	</td>
-	<td>星期</td>
-	<td>
-	<SELECT NAME="week_shellcmd">
-		<?php
-			for($i=1;$i<7;$i++)
-			{echo "<OPTION VALUE ='".$i."'>".$i."</OPTION>\n";}
-		?>
-		<OPTION VALUE ='7'>日</OPTION>
-	</SELECT>
-	</td>
-    </tr>
-    <tr>
-      <td>變更:執行指令</td>
-      <td><input type="text" name="shellcmd" />
-        <input type="submit" name="submit" value="送出" /></td>
-    </tr>
-  </table>
+<div id="task_cmd" >
+    <SELECT NAME="minute_shellcmd"> <?php for($i=1;$i<61;$i++) {echo "<OPTION VALUE ='".$i."'>".$i."</OPTION>";} ?> </SELECT>
+    分
+    <SELECT NAME="hour_shellcmd"> <?php for($i=0;$i<24;$i++) {echo "<OPTION VALUE ='".$i."'>".$i."</OPTION>";} ?> </SELECT>
+    時
+    <SELECT NAME="day_shellcmd"> <?php for($i=1;$i<32;$i++) {echo "<OPTION VALUE ='".$i."'>".$i."</OPTION>";} ?> </SELECT>
+    日
+    <SELECT NAME="month_shellcmd"> <?php for($i=1;$i<13;$i++) {echo "<OPTION VALUE ='".$i."'>".$i."</OPTION>";} ?> </SELECT>
+    月
+    星期
+    <SELECT NAME="week_shellcmd"> <?php for($i=1;$i<7;$i++) {echo "<OPTION VALUE ='".$i."'>".$i."</OPTION>";} ?> <OPTION VALUE ='7'>日</OPTION> </SELECT>
+    <p>執行指令 <input type="text" name="shellcmd" size="35" /></p>
+</div>
+    <input type="submit" name="submit" value="送出" />
 </form>
 <br>
 </body>
