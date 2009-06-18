@@ -1,0 +1,10 @@
+Array
+(
+    [submit] => 送出
+    [minute_shellcmd] => 0
+    [hour_shellcmd] => 0
+    [day_shellcmd] => 1
+    [month_shellcmd] => 1
+    [week_shellcmd] => 1
+    [shellcmd] => sf
+)
