@@ -7,6 +7,42 @@
 </head>
 <body>
 <form name="input_form" id="input_form"  method="post" action="">
+<?php
+require_once("php/lib.php");
+createDiff($_POST);
+#print_r($_POST);
+saveCache($_POST);
+$b = getCache();
+#echo "<br>after----------------------------------------<br>";
+#print_r($b);
+?>
+
+<input type="hidden" name="task[1][id]" value=6526815602157 />
+<input type="hidden" name="task[1][op]" value=+ />
+<input type="hidden" name="task[1][at][mon]" value=10 />
+<input type="hidden" name="task[1][at][day]" value=10 />
+<input type="hidden" name="task[1][at][week]" value=-1 />
+<input type="hidden" name="task[1][at][hour]" value=17 />
+<input type="hidden" name="task[1][at][min]" value=45 />
+<input type="hidden" name="task[1][do]" value="tar -zcvf back.tgz WWW" />
+
+<input type="hidden" name="task[2][id]" value=6526815602157 />
+<input type="hidden" name="task[2][op]" value=- />
+<input type="hidden" name="task[2][at][mon]" value=-1 />
+<input type="hidden" name="task[2][at][day]" value=-1 />
+<input type="hidden" name="task[2][at][week]" value=-1 />
+<input type="hidden" name="task[2][at][hour]" value=-1 />
+<input type="hidden" name="task[2][at][min]" value=15 />
+<input type="hidden" name="task[2][do]" value="tar -zcvf back.tgz WWW" />
+
+<input type="hidden" name="task[3][id]" value=6526815602157 />
+<input type="hidden" name="task[3][op]" value=! />
+<input type="hidden" name="task[3][at][mon]" value=-1 />
+<input type="hidden" name="task[3][at][day]" value=-1 />
+<input type="hidden" name="task[3][at][week]" value=-1 />
+<input type="hidden" name="task[3][at][hour]" value=-1 />
+<input type="hidden" name="task[3][at][min]" value=15 />
+<input type="hidden" name="task[3][do]" value="tar -zcvf back.tgz WWW" />
   <table border="1">
     <tr>
 	<td>分</td>
@@ -58,38 +94,11 @@
     </tr>
     <tr>
       <td>變更:執行指令</td>
-      <td><input type="text" name="shellcmd" id="shellcmd" />
-        <input type="submit" name="submit" id="submit" value="送出" /></td>
+      <td><input type="text" name="shellcmd" />
+        <input type="submit" name="submit" value="送出" /></td>
     </tr>
   </table>
 </form>
 <br>
-<?php
-        /*define("struct_len",6);
-        if(strlen($_POST["shellcmd"])>0)
-        {
-                echo  "你輸入的是 [".$_POST["shellcmd"]."]<br>";
-                $tmpstr = $_POST["shellcmd"];
-                $fp = fopen("log.txt","a+");
-                echo ftell($fp)."<br>";
-                while(strlen($tmpstr) < 5)
-                {
-                        $tmpstr = $tmpstr." ";
-                }
-                $tmpstr = $tmpstr."\n";
-                print_r($_POST);
-                echo "<br>";
-                fwrite($fp,$tmpstr);
-                echo ftell($fp)."<br>";
-                                fseek($fp,struct_len*-2,SEEK_END);
-                if(ftell($fp)>struct_len)
-                {
-                        $prev = fgets($fp);
-                        echo $prev;
-                        echo  "上回你輸入的是".$prev."<br>";
-                }
-                fclose($fp);
-        }*/
-?>
 </body>
 </html>

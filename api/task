@@ -1,0 +1,52 @@
+Array
+(
+    [task] => Array
+        (
+
+            [1] => Array
+                (
+                    [op] => +
+                    [at] => Array
+                        (
+
+                            [mon] => -1
+                            [day] => -1
+                            [week] => -1
+                            [hour] => -1
+                            [min] => -1
+
+                        )
+                    [do] => ./b
+                )
+            [2] => Array
+                (
+                    [op] => -
+                    [at] => Array
+
+                        (
+                            [mon] => -1
+                            [day] => -1
+                            [week] => -1
+                            [hour] => -1
+                            [min] => 15
+
+                        )
+                    [do] => ./c
+                )
+            [3] => Array
+                (
+                    [op] => !
+                    [at] => Array
+                        (
+                            [mon] => -1
+                            [day] => -1
+                            [week] => -1
+                            [hour] => -1
+                            [min] => 15
+                        )
+                    [do] => tar -zcvf back.tgz WWW
+                )
+        )
+    [shellcmd] =>
+    [submit] => 送出
+
