@@ -1,0 +1,6 @@
+td.task_cmd {
+   width: 500px;
+   height: 100px;
+   background-color: red;
+}
+  .task_pad {padding:10px 20px;vertical-align:center;text-align:center;}
