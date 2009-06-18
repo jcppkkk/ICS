@@ -36,4 +36,7 @@ function getCache()
     return unserialize(file_get_contents($CONFIG_CACHE));
 }
 
+function makeoption($f, $t)
+{ for($i=$f;$i<=$t;$i++) {echo "<OPTION VALUE ='".$i."'>".$i."</OPTION>";} }
+
 ?>
