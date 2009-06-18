@@ -3,16 +3,56 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>test</title>
-<script type="text/javascript" src="./js/jquery-dynamic-form.js"></script>
-<style type="text/css">
 
-div#task_cmd {
-   width: 100px;
-   height: 100px;
-   background-color: red;
-}
+<script type="text/javascript" src="php/js/jquery-1.3.2.min.js"></script>
+<script type="text/javascript" src="php/js/jquery-dynamic-form.js"></script>
+<script type="text/javascript" src="php/js/jquery.validate.js"></script>
+<link rel="stylesheet" type="text/css" href="php/style.css" />
+<script type="text/javascript">
+// only for demo purposes
+$.validator.setDefaults({
+    submitHandler: function() {
+        alert("submitted!");
+    }
+});
 
-</style>
+$().ready(function() {
+    $("#input_form").validate({
+        errorPlacement: function(error, element) {
+            error.appendTo( element.parent().next() );
+        },
+            highlight: function(element, errorClass) {
+                $(element).addClass(errorClass).parent().prev().children("select").addClass(errorClass);
+            }
+    });
+
+    var template = jQuery.format($("#template-cmd").val());
+
+    function addRow() {
+        $(template(i++)).appendTo("#TASK tbody");
+        $("#TASK td").addClass('task_pad');
+        $("#TASK #task_tr:even").css("backgroundColor",'#e7f3ff');
+        $("#TASK #task_tr:odd").css("backgroundColor",'#effbde');
+    }
+
+    var i = 1;
+    // start with one row
+    addRow();
+    // add more rows on click
+    $("#add").click(addRow);
+
+    // check keyup on quantity inputs to update totals field
+    $("#input_form").delegate("keyup", "input.quantity", function(event) {
+        var totals = 0;
+        $("#TASK input.quantity").each(function() {
+            totals += +this.value;
+        });
+        $("#totals").attr("value", totals).valid();
+    });
+
+});
+
+</script>
 </head>
 <body>
 <?php
@@ -24,22 +64,34 @@ $b = getCache();
 #echo "<br>after----------------------------------------<br>";
 #print_r($b);
 ?>
-<form name="input_form" id="input_form"  method="post" action="">
-<div id="task_cmd" >
-    <SELECT NAME="minute_shellcmd"> <?php for($i=1;$i<61;$i++) {echo "<OPTION VALUE ='".$i."'>".$i."</OPTION>";} ?> </SELECT>
-    分
-    <SELECT NAME="hour_shellcmd"> <?php for($i=0;$i<24;$i++) {echo "<OPTION VALUE ='".$i."'>".$i."</OPTION>";} ?> </SELECT>
-    時
-    <SELECT NAME="day_shellcmd"> <?php for($i=1;$i<32;$i++) {echo "<OPTION VALUE ='".$i."'>".$i."</OPTION>";} ?> </SELECT>
-    日
-    <SELECT NAME="month_shellcmd"> <?php for($i=1;$i<13;$i++) {echo "<OPTION VALUE ='".$i."'>".$i."</OPTION>";} ?> </SELECT>
-    月
-    星期
-    <SELECT NAME="week_shellcmd"> <?php for($i=1;$i<7;$i++) {echo "<OPTION VALUE ='".$i."'>".$i."</OPTION>";} ?> <OPTION VALUE ='7'>日</OPTION> </SELECT>
-    <p>執行指令 <input type="text" name="shellcmd" size="35" /></p>
-</div>
-    <input type="submit" name="submit" value="送出" />
+
+<button id="add">Add another input to the form</button>
+<form id="input_form" class="cmxform" method="post" action="">
+    <fieldset>
+        <legend>大家一起測爆他</legend>
+        <table id="TASK">
+            <tbody>
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td><input class="submit" type="submit" value="Submit"/></td>
+                </tr>
+            </tfoot>
+        </table>
+    </fieldset>
 </form>
-<br>
+
+<textarea style="display:none" id="template-cmd">
+    <tr id="task_tr" ><td id="task_cmd">
+        <label>{0}. Item</label>
+        月：    <SELECT NAME="Task[{0}]month"> <?php makeoption(1, 12); ?><OPTION VALUE ='*'>每月</OPTION> </SELECT>
+        日：    <SELECT NAME="Task[{0}]day"> <?php makeoption(1, 31); ?> <OPTION VALUE ='*'>每日</OPTION></SELECT>
+        星期：  <SELECT NAME="Task[{0}]week"> <?php makeoption(1, 6); ?> <OPTION VALUE ='7'>日</OPTION> </SELECT><br><br>
+        時：    <SELECT NAME="Task[{0}]minute"> <?php makeoption(0, 60); ?> </SELECT>
+        分：    <SELECT NAME="Task[{0}]hour"> <?php makeoption(0, 23); ?> </SELECT>
+        執行指令 <input type="text" name="shellcmd" size="35" />
+    </td></tr>
+</textarea>
+
 </body>
 </html>
