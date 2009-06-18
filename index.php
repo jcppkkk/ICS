@@ -68,7 +68,7 @@ $b = getCache();
 <button id="add">Add another input to the form</button>
 <form id="input_form" class="cmxform" method="post" action="">
     <fieldset>
-        <legend>å¤§å®¶ä¸€èµ·æ¸¬çˆ†ä»–</legend>
+        <legend>¤j®a¤@°_´úÃz¥L</legend>
         <table id="TASK">
             <tbody>
             </tbody>
@@ -84,12 +84,12 @@ $b = getCache();
 <textarea style="display:none" id="template-cmd">
     <tr id="task_tr" ><td id="task_cmd">
         <label>{0}. Item</label>
-        æœˆï¼š    <SELECT NAME="Task[{0}]month"> <?php makeoption(1, 12); ?><OPTION VALUE ='*'>æ¯æœˆ</OPTION> </SELECT>
-        æ—¥ï¼š    <SELECT NAME="Task[{0}]day"> <?php makeoption(1, 31); ?> <OPTION VALUE ='*'>æ¯æ—¥</OPTION></SELECT>
-        æ˜ŸæœŸï¼š  <SELECT NAME="Task[{0}]week"> <?php makeoption(1, 6); ?> <OPTION VALUE ='7'>æ—¥</OPTION> </SELECT><br><br>
-        æ™‚ï¼š    <SELECT NAME="Task[{0}]minute"> <?php makeoption(0, 60); ?> </SELECT>
-        åˆ†ï¼š    <SELECT NAME="Task[{0}]hour"> <?php makeoption(0, 23); ?> </SELECT>
-        åŸ·è¡ŒæŒ‡ä»¤ <input type="text" name="shellcmd" size="35" />
+        ¤ë¡G    <SELECT NAME="Task[{0}]month"> <?php makeoption(1, 12); ?><OPTION VALUE ='*'>¨C¤ë</OPTION> </SELECT>
+        ¤é¡G    <SELECT NAME="Task[{0}]day"> <?php makeoption(1, 31); ?> <OPTION VALUE ='*'>¨C¤é</OPTION></SELECT>
+        ¬P´Á¡G  <SELECT NAME="Task[{0}]week"> <?php makeoption(1, 6); ?> <OPTION VALUE ='7'>¤é</OPTION> </SELECT><br><br>
+        ®É¡G    <SELECT NAME="Task[{0}]minute"> <?php makeoption(0, 60); ?> </SELECT>
+        ¤À¡G    <SELECT NAME="Task[{0}]hour"> <?php makeoption(0, 23); ?> </SELECT>
+        °õ¦æ«ü¥O <input type="text" name="shellcmd" size="35" />
     </td></tr>
 </textarea>
 
