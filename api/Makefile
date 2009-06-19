@@ -1,2 +1,2 @@
 main: core.c
-	gcc core.c -o core
+	gcc -g core.c -o core

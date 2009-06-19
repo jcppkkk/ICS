@@ -1,52 +1,24 @@
 Array
 (
-    [task] => Array
+    [Task1] => Array
         (
-
-            [1] => Array
-                (
-                    [op] => +
-                    [at] => Array
-                        (
-
-                            [mon] => -1
-                            [day] => -1
-                            [week] => -1
-                            [hour] => -1
-                            [min] => -1
-
-                        )
-                    [do] => ./b
-                )
-            [2] => Array
-                (
-                    [op] => -
-                    [at] => Array
-
-                        (
-                            [mon] => -1
-                            [day] => -1
-                            [week] => -1
-                            [hour] => -1
-                            [min] => 15
-
-                        )
-                    [do] => ./c
-                )
-            [3] => Array
-                (
-                    [op] => !
-                    [at] => Array
-                        (
-                            [mon] => -1
-                            [day] => -1
-                            [week] => -1
-                            [hour] => -1
-                            [min] => 15
-                        )
-                    [do] => tar -zcvf back.tgz WWW
-                )
+            [type] => RSS
+            [id] => 16783437
+            [op] => +
+            [circle] => */30 * * * *
+            [url] => www.yahoo.com.tw
         )
-    [shellcmd] =>
-    [submit] => 送出
+    [Task2] => Array
+        (
+            [type] => CMD
+            [id] => 1548784
+            [op] => +
+            [month] => *
+            [day] => *
+            [week] => *
+            [hour] => *
+            [minute] => *
+            [cmd] => ./a
+        )
+)
 
