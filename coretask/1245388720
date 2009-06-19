@@ -1,0 +1,60 @@
+Array
+(
+    [Task1245388710] => Array
+        (
+            [type] => RSS
+            [id] => 1245388710
+            [op] => -
+            [circle] => */30 * * * *
+            [url] => ghfg
+        )
+
+    [Task1245388711] => Array
+        (
+            [type] => CMD
+            [id] => 1245388711
+            [op] => +
+            [month] => *
+            [day] => *
+            [week] => *
+            [hour] => *
+            [minute] => *
+            [cmd] => fghfghf
+        )
+
+    [Task1245388712] => Array
+        (
+            [type] => CMD
+            [id] => 1245388712
+            [op] => +
+            [month] => *
+            [day] => *
+            [week] => *
+            [hour] => *
+            [minute] => *
+            [cmd] => 
+        )
+
+    [Task1245388713] => Array
+        (
+            [type] => RSS
+            [id] => 1245388713
+            [op] => +
+            [circle] => */30 * * * *
+            [url] => 
+        )
+
+    [Task1245388714] => Array
+        (
+            [type] => CMD
+            [id] => 1245388714
+            [op] => +
+            [month] => *
+            [day] => *
+            [week] => *
+            [hour] => *
+            [minute] => *
+            [cmd] => 
+        )
+
+)

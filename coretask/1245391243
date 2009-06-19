@@ -1,0 +1,33 @@
+Array
+(
+    [Task1245391237] => Array
+        (
+            [type] => RSS
+            [id] => 1245391237
+            [op] => +
+            [circle] => */30 * * * *
+            [url] => 
+        )
+
+    [Task1245391238] => Array
+        (
+            [type] => CMD
+            [id] => 1245391238
+            [op] => +
+            [month] => *
+            [day] => *
+            [week] => *
+            [hour] => *
+            [minute] => *
+            [cmd] => 
+        )
+
+    [Task1245391239] => Array
+        (
+            [type] => YOU
+            [id] => 1245391239
+            [op] => +
+            [search] => 康熙來了+2009-06-17&aq=f
+        )
+
+)
