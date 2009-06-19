@@ -2,6 +2,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 </head>
 <body><pre>
+<<<<<<< HEAD:Doc/index.html
 第一次使用：
     https://github.com/
     使用Git與Github管理軟體開發專案.
@@ -43,6 +44,7 @@ Why Git is Better(圖片明瞭易懂)     http://zh-tw.whygitisbetterthanx.com/#
 Git 版本控制系統(1) (中文介紹)      http://ihower.idv.tw/blog/archives/2591
 Git 版本控制系統(2)
     開 branch 分支和操作遠端 repo.  http://ihower.idv.tw/blog/archives/2620
+>>>>>>> 6de72fc78b9040a452452f55d620f6e341636089:Doc/index.html
 
 //常用低
 git push //丟到original

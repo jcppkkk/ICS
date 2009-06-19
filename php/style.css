@@ -1,0 +1,10 @@
+.td_pad {
+    padding:5px 5px;
+    vertical-align:center;
+    text-align:left;
+    width: 600px;
+}
+
+#task_tr {
+    width: 500px;
+}

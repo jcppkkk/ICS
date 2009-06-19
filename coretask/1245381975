@@ -1,0 +1,23 @@
+Array
+(
+    [Task1] => Array
+        (
+            [type] => RSS
+            [id] => 1
+            [month] => */30 * * * *
+            [url] => dfgdg
+        )
+
+    [Task2] => Array
+        (
+            [type] => CMD
+            [id] => 2
+            [month] => *
+            [day] => *
+            [week] => *
+            [hour] => *
+            [minute] => *
+            [cmd] => dfgd
+        )
+
+)
