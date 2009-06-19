@@ -92,7 +92,7 @@ void deal_content(char (*content)[MAXLINE],int* line,DIR* dp,struct dirent* dirp
                     fgets(buffer,MAXLINE,fptr);
                 }
                 strcat(cmd,buffer);
-                printf("%s\n",cmd);
+                //printf("%s\n",cmd);
                 //format(cmd,date,buffer,id);
                 //fscanf(fptr,") [do] => ");
                 //fgets(buffer,MAXLINE,fptr);
@@ -126,6 +126,10 @@ void deal_content(char (*content)[MAXLINE],int* line,DIR* dp,struct dirent* dirp
             fclose(fptr);
             if(unlink(filename)==-1)
                 err_sys();
+            //char tmp9[255]="echo rm ";
+            //strcat(tmp9, filename);
+            //system(tmp9);
+            puts(filename);
         }
         dirp = readdir(dp);
         deal_content(content,line,dp,dirp);

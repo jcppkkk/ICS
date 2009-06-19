@@ -111,6 +111,7 @@ exit(0);
 
     <button id="add" value="cmd">新增 自訂命令</button>
     <button id="add" value="rss">新增 RSS訂閱</button>
+    <button id="add" value="you">新增 youtube訂閱</button>
     <form id="input_form" class="cmxform" method="post" action="index.php">
         <table id="TASK">
             <tbody>
@@ -180,6 +181,29 @@ exit(0);
                         <OPTION VALUE ='0 0 * * 1'>每周</OPTION>
                     </SELECT>
                     <br>RSS網址： <input type="text" autocomplete="off" name="Task{0}[url]" size="50" />
+                </fieldset>
+            </td>
+            <td>
+                <input  value="delete" type="button">
+            </td>
+        </tr>
+    </textarea>
+
+    <textarea style="display:none" id="template-you">
+        <tr id="task_tr" >
+            <td class="td_pad">
+                <fieldset>
+                    <legend>{0}. 訂閱youtube</legend>
+                    <input type="hidden" name="Task{0}[type]" value="YOU" >
+                    <input type="hidden" name="Task{0}[id]" value="{0}" >
+                    <input type="hidden" id="op" name="Task{0}[op]" value="+" >
+                    訂閱節目：
+                    <SELECT NAME="Task{0}[search]">
+                        <OPTION VALUE ='我愛黑澀會+2009-06-17&aq=f'>我愛黑澀會</OPTION>
+                        <OPTION VALUE ='模范棒棒堂+2009-06-17&aq=f'>模范棒棒堂</OPTION>
+                        <OPTION VALUE ='康熙來了+2009-06-17&aq=f'>康熙來了</OPTION>
+                        <OPTION VALUE ='2009-06-06+我猜我猜我猜猜猜&aq=f'>我猜我猜我猜猜猜</OPTION>
+                    </SELECT>
                 </fieldset>
             </td>
             <td>
