@@ -1,0 +1,5 @@
+ssh linux
+tcsh
+
+ICSHOME=sp_project/ICS/api
+* * * * * cd $ICSHOME; ./core

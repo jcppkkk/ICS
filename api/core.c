@@ -8,11 +8,12 @@
 
 #define MAXLINE 80
 #define MAX_SCHEDULER 200
+#define IDSIZE 20
 #define bool  int
 #define true  1
 #define false 0
 
-static const char* dirname = "../.UIconfig";
+static const char* dirname = "../coretask";
 static const char* tmp_filename = "crontab.sh";
 
 void err_sys(){
@@ -25,7 +26,7 @@ void err_quit(const char* str){
     _Exit(1);
 }
 
-void format(char* cmd,const int* date,const char* buffer){
+void format(char* cmd,const int* date,const char* buffer,const char* id){
     int i;
     char tmp[10];
     cmd[0]='\0';
@@ -47,10 +48,12 @@ void deal_content(char (*content)[MAXLINE],int* line,DIR* dp,struct dirent* dirp
     if(dirp==NULL) return;
     else{
         FILE* fptr;
-        char buffer[MAXLINE],cmd[MAXLINE];
+        char buffer[MAXLINE],cmd[MAXLINE],type[MAXLINE];
         char filename[MAXLINE];
+        char id[IDSIZE];
         int i,n;
-        int ntask,date[5]; // min hour day mon week
+        char date[5][IDSIZE];
+        int ntask; // min hour day mon week
         char option; // + - !
         if(strcmp(dirp->d_name,".")!=0 && strcmp(dirp->d_name,"..")!=0){
             strcpy(filename,dirname);
@@ -58,25 +61,49 @@ void deal_content(char (*content)[MAXLINE],int* line,DIR* dp,struct dirent* dirp
             strcat(filename,dirp->d_name);
             fptr=fopen(filename,"r");
             /*fetch*/
-            fscanf(fptr,"Array ( [task] => Array ( ");
-            while(fscanf(fptr,"[%d] => Array ",&ntask)){
-                fscanf(fptr,"( [op] => %c [at] => Array ( ",&option);
-                fscanf(fptr,"[mon] => %d ",date+3);
-                fscanf(fptr,"[day] => %d ",date+2);
-                fscanf(fptr,"[week] => %d ",date+4);
-                fscanf(fptr,"[hour] => %d ",date+1);
-                fscanf(fptr,"[min] => %d ",date);
-                fscanf(fptr,") [do] => ");
-                fgets(buffer,MAXLINE,fptr);
+            cmd[0]='\0';
+            fscanf(fptr,"Array ( ");
+            while(fscanf(fptr,"[Task%d] => Array ",&ntask)){
+                fscanf(fptr,"( [type] => %s ",type);
+                fscanf(fptr,"[id] => %s ",id);
+                fscanf(fptr,"[op] => %c ",&option);
+                if(fscanf(fptr,"[month] => %s ",date[3])){
+                    fscanf(fptr,"[day] => %s ",date[2]);
+                    fscanf(fptr,"[week] => %s ",date[4]);
+                    fscanf(fptr,"[hour] => %s ",date[1]);
+                    fscanf(fptr,"[minute] => %s ",date[0]);
+                    for(i=0;i<5;i++){
+                        strcat(cmd,date[i]);
+                        strcat(cmd," ");
+                    }
+                }else{
+                    fscanf(fptr,"circle] => ");
+                    fgets(cmd,MAXLINE,fptr);
+                    cmd[strlen(cmd)-1] = '\0';
+                    strcat(cmd," ");
+                }
+                strcat(cmd,"cd $ICSHOME; ");
+                if(strcmp(type,"RSS")==0){
+                    fscanf(fptr," [url] => ");
+                    fgets(buffer,MAXLINE,fptr);
+                    strcat(cmd,"./youtube ");
+                }else if(strcmp(type,"CMD")==0){
+                    fscanf(fptr,"[cmd] => ");
+                    fgets(buffer,MAXLINE,fptr);
+                }
+                strcat(cmd,buffer);
+                //printf("%s\n",cmd);
+                //format(cmd,date,buffer,id);
+                //fscanf(fptr,") [do] => ");
+                //fgets(buffer,MAXLINE,fptr);
                 fscanf(fptr," ) ");
-                format(cmd,date,buffer);
                 switch(option){
                 case '+': // add
                     for(i=0;i<(*line);i++)
                         if(strcmp(content[i],cmd)==0)
                             break;
                     if(i==*line){
-                        snprintf(content[(*line)++],MAXLINE,"#ICS task id = %d, comment\n",ntask);
+                        snprintf(content[(*line)++],MAXLINE,"#ICS task id = %s, comment\n",id);
                         strcpy(content[(*line)++],cmd);
                     }
                     break;
@@ -92,12 +119,17 @@ void deal_content(char (*content)[MAXLINE],int* line,DIR* dp,struct dirent* dirp
                 default:
                     err_quit("unkown option");
                 }
+                cmd[0] = '\0';
             }
             errno = 0;
             /*fetch*/
             fclose(fptr);
             if(unlink(filename)==-1)
                 err_sys();
+            //char tmp9[255]="echo rm ";
+            //strcat(tmp9, filename);
+            //system(tmp9);
+            puts(filename);
         }
         dirp = readdir(dp);
         deal_content(content,line,dp,dirp);
