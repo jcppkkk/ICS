@@ -1,0 +1,3 @@
+ICSHOME=sp_project/ICS/api
+ICSDATA=sp_project/ICS/data
+* * * * * cd $ICSHOME/CORE; ./core

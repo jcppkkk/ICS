@@ -1,0 +1,7 @@
+git commit -a
+git push
+git checkout <target>
+git pull
+git bransh master
+git merge
+
