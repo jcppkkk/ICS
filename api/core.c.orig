@@ -30,11 +30,36 @@ void err_quit(const char* str){
     _Exit(1);
 }
 
+<<<<<<< HEAD:api/core.c
+void format(char* cmd,const int* date,const char* buffer,const char* id){
+    int i;
+    char tmp[10];
+    cmd[0]='\0';
+    for(i=0;i<5;i++){
+        if(date[i]==-1)
+            strcat(cmd,"* ");
+        else if(date[i]>0){
+            snprintf(tmp,10,"%d ",date[i]);
+            strcat(cmd,tmp);
+        }else{
+            err_quit("unkown time");
+        }
+    }
+    strcat(cmd,"cd $ICSHOME; ");
+    strcat(cmd,buffer);
+}
+
+=======
+>>>>>>> che:api/core.c
 void deal_content(char (*content)[MAXLINE],int* line,DIR* dp,struct dirent* dirp){
     if(dirp==NULL) return;
     else{
         FILE* fptr;
+<<<<<<< HEAD:api/core.c
+        char buffer[MAXLINE],cmd[MAXLINE],type[MAXLINE];
+=======
         char buffer[MAXLINE],cmd[MAXLINE]={0};
+>>>>>>> che:api/core.c
         char filename[MAXLINE];
         char id[IDSIZE];
         int i,n;
@@ -48,6 +73,19 @@ void deal_content(char (*content)[MAXLINE],int* line,DIR* dp,struct dirent* dirp
             strcat(filename,dirp->d_name);
             fptr=fopen(filename,"r");
             /*fetch*/
+<<<<<<< HEAD:api/core.c
+            cmd[0]='\0';
+            fscanf(fptr,"Array ( ");
+            while(fscanf(fptr,"[Task%d] => Array ",&ntask)){
+                fscanf(fptr,"( [type] => %s ",type);
+                fscanf(fptr,"[id] => %s ",id);
+                fscanf(fptr,"[op] => %c ",&option);
+                if(fscanf(fptr,"[month] => %s ",date[3])){
+                    fscanf(fptr,"[day] => %s ",date[2]);
+                    fscanf(fptr,"[week] => %s ",date[4]);
+                    fscanf(fptr,"[hour] => %s ",date[1]);
+                    fscanf(fptr,"[minute] => %s ",date[0]);
+=======
             fscanf(fptr,"Array ( ");
             while(fscanf(fptr,"[Task%d] => Array ",&ntask)){
                 fscanf(fptr,"( [type] => %s ",buffer);
@@ -66,10 +104,34 @@ void deal_content(char (*content)[MAXLINE],int* line,DIR* dp,struct dirent* dirp
                     fscanf(fptr,"[week] => %s ",date[4]);
                     fscanf(fptr,"[hour] => %s ",date[0]);
                     fscanf(fptr,"[minute] => %s ",date[1]);
+>>>>>>> che:api/core.c
                     for(i=0;i<5;i++){
                         strcat(cmd,date[i]);
                         strcat(cmd," ");
                     }
+<<<<<<< HEAD:api/core.c
+                }else{
+                    fscanf(fptr,"circle] => ");
+                    fgets(cmd,MAXLINE,fptr);
+                    cmd[strlen(cmd)-1] = '\0';
+                    strcat(cmd," ");
+                }
+                strcat(cmd,"cd $ICSHOME; ");
+                if(strcmp(type,"RSS")==0){
+                    fscanf(fptr," [url] => ");
+                    fgets(buffer,MAXLINE,fptr);
+                    strcat(cmd,"./youtube ");
+                }else if(strcmp(type,"CMD")==0){
+                    fscanf(fptr,"[cmd] => ");
+                    fgets(buffer,MAXLINE,fptr);
+                }
+                strcat(cmd,buffer);
+                printf("%s\n",cmd);
+                //format(cmd,date,buffer,id);
+                //fscanf(fptr,") [do] => ");
+                //fgets(buffer,MAXLINE,fptr);
+                fscanf(fptr," ) ");
+=======
                 }else if(strcmp(buffer,"YOU")==0){
                     type = YOU;
                     strcat(cmd,YOUTUBE_FORMAT);
@@ -99,17 +161,9 @@ void deal_content(char (*content)[MAXLINE],int* line,DIR* dp,struct dirent* dirp
                     strcat(cmd,id);
                     break;
                 }
-<<<<<<< HEAD:api/core.c
-                strcat(cmd,buffer);
-                //printf("%s\n",cmd);
-                //format(cmd,date,buffer,id);
-                //fscanf(fptr,") [do] => ");
-                //fgets(buffer,MAXLINE,fptr);
-                fscanf(fptr," ) ");
-=======
                 strcat(cmd,"\n");
                 fscanf(fptr,") ");
->>>>>>> hung:api/core.c
+>>>>>>> che:api/core.c
                 switch(option){
                 case '+': // add
                     for(i=0;i<(*line);i++)
@@ -139,10 +193,6 @@ void deal_content(char (*content)[MAXLINE],int* line,DIR* dp,struct dirent* dirp
             fclose(fptr);
             if(unlink(filename)==-1)
                 err_sys();
-            //char tmp9[255]="echo rm ";
-            //strcat(tmp9, filename);
-            //system(tmp9);
-            puts(filename);
         }
         dirp = readdir(dp);
         deal_content(content,line,dp,dirp);
