@@ -13,12 +13,15 @@
 $().ready(function() {
     // start add row
     //addRow("you");
-    $("#TASKS tr:hidden").remove();
     $("#TASKS").hide();
-    $("#TASKS select").each(function(){
+    $("#TASKS select,#TASKS input:text").each(function(){
         $(this).val($(this).attr("val"));
     });
+    //$("#TASKS input").each(function(){
+    //    $(this).val($(this).attr("val"));
+    //});
     $("#TASKS").show("normal");
+
 
     var i = <?php echo time(); ?>;
 
@@ -69,13 +72,14 @@ $().ready(function() {
         //alert('status: ' + statusText + '\n\nresponseText: \n' + responseText +
         //    '\n\nThe output div should have already been updated with the responseText.');
 
+        $("#TASKS tr:hidden").each(function(){$(this).remove();});
         $("#TASKS tbody select").each(function(){
             $(this).attr("val",$(this).find(":selected").val());
-            $(this).val($(this).find(":selected").val());
+            //$(this).val($(this).find(":selected").val());
         });
-        $("#TASKS tbody select").each(function(){
-            $(this).attr("val",$(this).find(":selected").val());
-            $(this).val($(this).find(":selected").val());
+        $("#TASKS tbody input:text").each(function(){
+            $(this).attr("val",$(this).val());
+            //$(this).val($(this).find(":selected").val());
         });
         $.post('php/cache.php',{ text: $("#TASKS tbody").html() }, function(txt){});
     }

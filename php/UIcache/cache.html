@@ -4,7 +4,27 @@
 
 
 
-
-
-
-                                                                        
+        <tr style=\"background-color: rgb(231, 243, 255);\" id=\"task_tr\">
+        <td class=\"td_pad\">
+            <fieldset>
+                <legend>1245494817. 追蹤RSS新消息</legend>
+                <input name=\"Task1245494817[type]\" value=\"RSS\" type=\"hidden\">
+                <input name=\"Task1245494817[id]\" value=\"1245494817\" type=\"hidden\">
+                <input id=\"op\" name=\"Task1245494817[op]\" value=\"+\" type=\"hidden\">
+                更新週期：
+                <select val=\"*/30 * * * *\" name=\"Task1245494817[circle]\">
+                    <option value=\"*/30 * * * *\">每30分鐘</option>
+                    <option value=\"0 * * * *\">每1小時</option>
+                    <option value=\"0 */3 * * *\">每3小時</option>
+                    <option value=\"0 */6 * * *\">每6小時</option>
+                    <option value=\"0 0,12 * * *\">每12小時</option>
+                    <option value=\"0 0 * * *\">每日</option>
+                    <option value=\"0 0 * * 1\">每周</option>
+                </select>
+                <br>RSS網址： <input val=\"fffffffffffff\" autocomplete=\"off\" name=\"Task1245494817[url]\" size=\"50\" type=\"text\">
+            </fieldset>
+        </td>
+        <td>
+            <input value=\"delete\" type=\"button\">
+        </td>
+    </tr>                                        
