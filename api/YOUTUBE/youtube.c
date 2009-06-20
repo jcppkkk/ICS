@@ -35,8 +35,8 @@ strcpy(previous,current);
 getTitle(task_id,(*count),ptr_temp, file2);
 
 sprintf(num,"../../data/%s/page/%d",task_id,(*count));
-cmd=(char*)malloc(sizeof(char)*(strlen("wget http://www.youtube.com")+strlen(current)+strlen(num)+1+4)); //add 4 for " -O "
-sprintf(cmd,"wget http://www.youtube.com%s -O %s",current,num);
+cmd=(char*)malloc(sizeof(char)*(strlen("/usr/local/bin/wget http://www.youtube.com")+strlen(current)+strlen(num)+1+4)); //add 4 for " -O "
+sprintf(cmd,"/usr/local/bin/wget http://www.youtube.com%s -O %s",current,num);
 system(cmd);
 
 sprintf(cmd,"sh youtube.sh %d ../../data/%s/%d %s",(*count),task_id,(*count),task_id);
@@ -79,7 +79,7 @@ int count=0,i,task_id;
 sprintf(path,"mkdir -p ../../data/%s/page",argv[2]);
 system(path);
 
-sprintf(cmd,"wget \"http://www.youtube.com/results?search_type=&search_query=%s&aq=f\" -O %s",argv[1],argv[2]);
+sprintf(cmd,"/usr/local/bin/wget \"http://www.youtube.com/results?search_type=&search_query=%s&aq=f\" -O %s",argv[1],argv[2]);
 system(cmd);
 
 sprintf(path,"rm ../../data/%s/page/*",argv[2]);
