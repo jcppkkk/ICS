@@ -2,7 +2,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html>
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=big5" />
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <title>test</title>
 
         <link rel="stylesheet" type="text/css" href="php/style.css" /></link>
@@ -220,7 +220,7 @@ if($CACHE != null){
                     <OPTION VALUE ='*'>每分</OPTION>
                     <?php makeOption(0, 59, null, "分"); ?>
                 </SELECT>
-                <br>執行指令 <input type="text" autocomplete="off" name="Task{0}[cmd]" size="40" />
+                <br>執行指令：<input type="text" autocomplete="off" name="Task{0}[cmd]" size="45" />
             </fieldset>
         </td>
         <td id="td">
@@ -252,7 +252,7 @@ if($CACHE != null){
                     <OPTION VALUE ="0 0 * * *">每日</OPTION>
                     <OPTION VALUE ="0 0 * * 1">每周</OPTION>
                 </SELECT>
-                <br>RSS網址： <input type="text" autocomplete="off" name="Task{0}[url]" size="40" />
+                <br>RSS網址： <input type="text" autocomplete="off" name="Task{0}[url]" size="45" />
             </fieldset>
         </td>
         <td id="td">
