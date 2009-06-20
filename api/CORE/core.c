@@ -16,8 +16,9 @@
 #define YOU 100
 #define CMD 101
 #define RSS 102
-#define YOUTUBE_FORMAT "* * * * * "
+#define YOUTUBE_FORMAT "* * */2 * * "
 
+static const char* dirdata = "../../data";
 static const char* dirname = "../../coretask";
 static const char* tmp_filename = "crontab.sh";
 
@@ -54,6 +55,10 @@ void deal_content(char (*content)[MAXLINE],int* line,DIR* dp,struct dirent* dirp
                 fscanf(fptr,"( [type] => %s ",buffer);
                 fscanf(fptr,"[id] => %s ",id);
                 fscanf(fptr,"[op] => %c ",&option);
+                if(option=='='){
+                    fscanf(fptr,") ");
+                    continue;
+                }
                 //get time format
                 if(strcmp(buffer,"RSS")==0){
                     type = RSS;
@@ -63,6 +68,9 @@ void deal_content(char (*content)[MAXLINE],int* line,DIR* dp,struct dirent* dirp
                     fscanf(fptr," ");
                 }else if(strcmp(buffer,"CMD")==0){
                     type = CMD;
+                    // mkdir
+                    sprintf(buffer,"%s/%s",dirdata,id);
+                    mkdir(buffer,S_IRWXO|S_IRWXU);
                     fscanf(fptr,"[month] => %s ",date[3]);
                     fscanf(fptr,"[day] => %s ",date[2]);
                     fscanf(fptr,"[week] => %s ",date[4]);
@@ -86,7 +94,7 @@ void deal_content(char (*content)[MAXLINE],int* line,DIR* dp,struct dirent* dirp
                     strcat(cmd,"cd $ICSHOME/RSS; ");
                     break;
                 case CMD:
-                    sprintf(buffer,"cd $ICSDATA; mkdir %s; cd %s; ",id,id);
+                    sprintf(buffer,"cd $ICSDATA/%s; ",id);
                     strcat(cmd,buffer);
                     break;
                 }
@@ -97,8 +105,7 @@ void deal_content(char (*content)[MAXLINE],int* line,DIR* dp,struct dirent* dirp
                     fscanf(fptr,"[search] => %s ",buffer);
                     strcat(cmd,"\"");
                     strcat(cmd,buffer);
-                    strcat(cmd,"\"");
-                    strcat(cmd," ");
+                    strcat(cmd,"\" ");
                     strcat(cmd,id);
                     break;
                 case CMD:
@@ -113,12 +120,11 @@ void deal_content(char (*content)[MAXLINE],int* line,DIR* dp,struct dirent* dirp
                     fscanf(fptr,"[url] => %s ",buffer);
                     strcat(cmd,"\"");
                     strcat(cmd,buffer);
-                    strcat(cmd,"\"");
-                    strcat(cmd," ");
+                    strcat(cmd,"\" ");
                     strcat(cmd,id);
                     break;
                 }
-                strcat(cmd,"\n");
+                strcat(cmd," >/dev/null 2>&1\n");
                 fscanf(fptr,") ");
                 switch(option){
                 case '+': // add
@@ -152,7 +158,7 @@ void deal_content(char (*content)[MAXLINE],int* line,DIR* dp,struct dirent* dirp
             //char tmp9[255]="echo rm ";
             //strcat(tmp9, filename);
             //system(tmp9);
-            puts(filename);
+            //puts(filename);
         }
         dirp = readdir(dp);
         deal_content(content,line,dp,dirp);
