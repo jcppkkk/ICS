@@ -12,6 +12,10 @@
 #define bool  int
 #define true  1
 #define false 0
+#define YOU 100
+#define CMD 101
+#define RSS 102
+#define YOUTUBE_FORMAT "* * */2 * * "
 
 static const char* dirname = "../coretask";
 static const char* tmp_filename = "crontab.sh";
@@ -26,77 +30,77 @@ void err_quit(const char* str){
     _Exit(1);
 }
 
-void format(char* cmd,const int* date,const char* buffer,const char* id){
-    int i;
-    char tmp[10];
-    cmd[0]='\0';
-    for(i=0;i<5;i++){
-        if(date[i]==-1)
-            strcat(cmd,"* ");
-        else if(date[i]>0){
-            snprintf(tmp,10,"%d ",date[i]);
-            strcat(cmd,tmp);
-        }else{
-            err_quit("unkown time");
-        }
-    }
-    strcat(cmd,"cd $ICSHOME; ");
-    strcat(cmd,buffer);
-}
-
 void deal_content(char (*content)[MAXLINE],int* line,DIR* dp,struct dirent* dirp){
     if(dirp==NULL) return;
     else{
         FILE* fptr;
-        char buffer[MAXLINE],cmd[MAXLINE],type[MAXLINE];
+        char buffer[MAXLINE],cmd[MAXLINE]={0};
         char filename[MAXLINE];
         char id[IDSIZE];
         int i,n;
         char date[5][IDSIZE];
         int ntask; // min hour day mon week
         char option; // + - !
+        int type; // YOU , CMD , RSS ...
         if(strcmp(dirp->d_name,".")!=0 && strcmp(dirp->d_name,"..")!=0){
             strcpy(filename,dirname);
             strcat(filename,"/");
             strcat(filename,dirp->d_name);
             fptr=fopen(filename,"r");
             /*fetch*/
-            cmd[0]='\0';
             fscanf(fptr,"Array ( ");
             while(fscanf(fptr,"[Task%d] => Array ",&ntask)){
-                fscanf(fptr,"( [type] => %s ",type);
+                fscanf(fptr,"( [type] => %s ",buffer);
                 fscanf(fptr,"[id] => %s ",id);
                 fscanf(fptr,"[op] => %c ",&option);
-                if(fscanf(fptr,"[month] => %s ",date[3])){
+                if(strcmp(buffer,"RSS")==0){
+                    type = RSS;
+                    fscanf(fptr,"[circle] => ");
+                    fgets(cmd,MAXLINE,fptr);
+                    cmd[strlen(cmd)-1] = ' ';
+                    fscanf(fptr," ");
+                }else if(strcmp(buffer,"CMD")==0){
+                    type = CMD;
+                    fscanf(fptr,"[month] => %s ",date[3]);
                     fscanf(fptr,"[day] => %s ",date[2]);
                     fscanf(fptr,"[week] => %s ",date[4]);
-                    fscanf(fptr,"[hour] => %s ",date[1]);
-                    fscanf(fptr,"[minute] => %s ",date[0]);
+                    fscanf(fptr,"[hour] => %s ",date[0]);
+                    fscanf(fptr,"[minute] => %s ",date[1]);
                     for(i=0;i<5;i++){
                         strcat(cmd,date[i]);
                         strcat(cmd," ");
                     }
-                }else{
-                    fscanf(fptr,"circle] => ");
-                    fgets(cmd,MAXLINE,fptr);
-                    cmd[strlen(cmd)-1] = '\0';
-                    strcat(cmd," ");
-                }
+                }else if(strcmp(buffer,"YOU")==0){
+                    type = YOU;
+                    strcat(cmd,YOUTUBE_FORMAT);
+                }else
+                    err_quit("unkown cmd");
                 strcat(cmd,"cd $ICSHOME; ");
-                if(strcmp(type,"RSS")==0){
-                    fscanf(fptr," [url] => ");
-                    fgets(buffer,MAXLINE,fptr);
+                switch(type){
+                case YOU:
                     strcat(cmd,"./youtube ");
-                }else if(strcmp(type,"CMD")==0){
+                    fscanf(fptr,"[search] => %s ",buffer);
+                    strcat(cmd,buffer);
+                    strcat(cmd," ");
+                    strcat(cmd,id);
+                    break;
+                case CMD:
                     fscanf(fptr,"[cmd] => ");
                     fgets(buffer,MAXLINE,fptr);
+                    buffer[strlen(buffer)-1] = '\0';
+                    fscanf(fptr," ");
+                    strcat(cmd,buffer);
+                    break;
+                case RSS:
+                    strcat(cmd,"./rss ");
+                    fscanf(fptr,"[url] => %s ",buffer);
+                    strcat(cmd,buffer);
+                    strcat(cmd," ");
+                    strcat(cmd,id);
+                    break;
                 }
-                strcat(cmd,buffer);
-                printf("%s\n",cmd);
-                //format(cmd,date,buffer,id);
-                //fscanf(fptr,") [do] => ");
-                //fgets(buffer,MAXLINE,fptr);
-                fscanf(fptr," ) ");
+                strcat(cmd,"\n");
+                fscanf(fptr,") ");
                 switch(option){
                 case '+': // add
                     for(i=0;i<(*line);i++)
