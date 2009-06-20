@@ -44,6 +44,15 @@ $(document).ready(function() {
         $("input.submit").removeAttr("disabled");
     });
 
+    // Rename TASKS
+    //<legend><input type="text" value="{0}. 追蹤RSS新消息" size="30"></legend>
+    $(":input[button=rename]").live("click" ,function(){
+        $legend = $(this).parent().parent().find("legend");
+        $text = $legend.html();
+        $legend.html('<input id="legendBOX" type="text" value="'+$text+'" size="30">');
+        $(this).parent().parent().find("#op").val("!");
+    });
+
     // DELETE TASKS
     $(":input[button=delete]").live("click" ,function(){
         $(this).parent().parent().fadeOut(250, function() {
@@ -75,7 +84,14 @@ $(document).ready(function() {
     function before(formData, jqForm, options) {
         // To access the DOM element for the form do this:
         // var formElement = jqForm[0];
-
+        if($("#legendBOX").length)
+        {
+            $("#legendBOX").each(function(){
+                $text = $(this).val();
+                $(this).parent().html($text);
+                //$(this).remove();
+            });
+        }
         //var queryString = $.param(formData);
         //alert('About to submit: \n\n' + queryString);
         return true;
@@ -205,6 +221,7 @@ if($CACHE != null){
             </fieldset>
         </td>
         <td id="td">
+            <input button="rename" value="改標題" type="button"><br>
             <input button="delete" value="刪除" type="button"><br>
             <input button="modify" value="重新修改" type="button">
         </td>
@@ -218,7 +235,7 @@ if($CACHE != null){
     <tr id="task_tr" >
         <td id="td" class="td_input">
             <fieldset>
-                <legend>{0}. 追蹤RSS新消息</legend>
+                <legend><input type="text" value="{0}. 追蹤RSS新消息" size="30"></legend>
                 <input type="hidden" name="Task{0}[type]" value="RSS" >
                 <input type="hidden" name="Task{0}[id]" value="{0}" >
                 <input type="hidden" id="op" name="Task{0}[op]" value="+" >
@@ -236,6 +253,7 @@ if($CACHE != null){
             </fieldset>
         </td>
         <td id="td">
+            <input button="rename" value="改標題" type="button"><br>
             <input button="delete" value="刪除" type="button"><br>
             <input button="modify" value="重新修改" type="button">
         </td>
@@ -263,6 +281,7 @@ if($CACHE != null){
             </fieldset>
         </td>
         <td id="td">
+            <input button="rename" value="改標題" type="button"><br>
             <input button="delete" value="刪除" type="button"><br>
             <input button="modify" value="重新修改" type="button">
         </td>
