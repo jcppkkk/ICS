@@ -6,8 +6,8 @@
 #include <dirent.h>
 #include <errno.h>
 
-#define MAXLINE 80
-#define CMD_LINE 200
+#define MAXLINE 1024
+#define CMD_LINE 2000
 #define MAX_SCHEDULER 200
 #define IDSIZE 20
 #define bool  int
