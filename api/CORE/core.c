@@ -107,13 +107,17 @@ void deal_content(char (*content)[MAXLINE],int* line,DIR* dp,struct dirent* dirp
                     strcat(cmd,buffer);
                     strcat(cmd,"\" ");
                     strcat(cmd,id);
+                    strcat(cmd," >/dev/null 2>&1");
                     break;
                 case CMD:
                     fscanf(fptr,"[cmd] => ");
-                    fgets(buffer,MAXLINE,fptr);
-                    buffer[strlen(buffer)-1] = '\0';
+                    strcpy(buffer,"(");
+                    fgets(buffer+1,MAXLINE,fptr);
+                    buffer[strlen(buffer)-1] = ')';
+                    buffer[strlen(buffer)] = '\0';
                     fscanf(fptr," ");
                     strcat(cmd,buffer);
+                    strcat(cmd," >>index.html 2>/dev/null");
                     break;
                 case RSS:
                     strcat(cmd,"./rss ");
@@ -122,9 +126,10 @@ void deal_content(char (*content)[MAXLINE],int* line,DIR* dp,struct dirent* dirp
                     strcat(cmd,buffer);
                     strcat(cmd,"\" ");
                     strcat(cmd,id);
+                    strcat(cmd," >/dev/null 2>&1");
                     break;
                 }
-                strcat(cmd," >/dev/null 2>&1\n");
+                strcat(cmd,"\n");
                 fscanf(fptr,") ");
                 switch(option){
                 case '+': // add

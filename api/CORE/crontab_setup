@@ -1,3 +1,4 @@
+PATH=/sbin:/bin:/usr/sbin:/usr/bin:/usr/games:/usr/local/sbin:/usr/local/bin
 ICSHOME=sp_project/ICS/api
 ICSDATA=sp_project/ICS/data
 * * * * * cd $ICSHOME/CORE; ./core
