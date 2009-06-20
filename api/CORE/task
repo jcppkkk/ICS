@@ -1,31 +1,137 @@
 Array
 (
-    [Task1234657897] => Array
-        (
-            [type] => RSS
-            [id] => 13246767897
-            [op] => +
-            [circle] => */30 * * * *
-            [url] => fghjhe(*^lkb23gf
-        )
-    [Task1234687657] => Array
+    [Task1245523666] => Array
         (
             [type] => CMD
-            [id] => 123457897
+            [id] => 1245523666
+            [op] => -
+        )
+
+    [Task1245523667] => Array
+        (
+            [type] => RSS
+            [id] => 1245523667
+            [op] => -
+        )
+
+    [Task1245523668] => Array
+        (
+            [type] => CMD
+            [id] => 1245523668
+            [op] => -
+        )
+
+    [Task1245523669] => Array
+        (
+            [type] => RSS
+            [id] => 1245523669
+            [op] => -
+        )
+
+    [Task1245523670] => Array
+        (
+            [type] => CMD
+            [id] => 1245523670
+            [op] => -
+        )
+
+    [Task1245523671] => Array
+        (
+            [type] => RSS
+            [id] => 1245523671
+            [op] => -
+        )
+
+    [Task1245523672] => Array
+        (
+            [type] => CMD
+            [id] => 1245523672
+            [op] => -
+            [month] => *
+            [day] => *
+            [week] => *
+            [hour] => *
+            [minute] => *
+            [cmd] => dcdc
+        )
+
+    [Task1245523673] => Array
+        (
+            [type] => CMD
+            [id] => 1245523673
             [op] => +
             [month] => *
             [day] => *
             [week] => *
             [hour] => *
             [minute] => *
-            [cmd] => ls > QQ
+            [cmd] =>
         )
-    [Task1234657897] => Array
-        (
-            [type] => YOU
-            [id] => 132456756
-            [op] => +
-            [search] => texxxxt+2009-06-17&aq=f
-        )
-)
 
+    [Task1245523674] => Array
+        (
+            [type] => RSS
+            [id] => 1245523674
+            [op] => +
+            [circle] => */30 * * * *
+            [url] => iluil
+        )
+
+    [Task1245523675] => Array
+        (
+            [type] => CMD
+            [id] => 1245523675
+            [op] => +
+            [month] => *
+            [day] => *
+            [week] => *
+            [hour] => *
+            [minute] => *
+            [cmd] =>
+        )
+
+    [Task1245523676] => Array
+        (
+            [type] => RSS
+            [id] => 1245523676
+            [op] => +
+            [circle] => */30 * * * *
+            [url] =>
+        )
+
+    [Task1245523677] => Array
+        (
+            [type] => CMD
+            [id] => 1245523677
+            [op] => +
+            [month] => *
+            [day] => *
+            [week] => *
+            [hour] => *
+            [minute] => *
+            [cmd] => io;oi;
+        )
+
+    [Task1245523678] => Array
+        (
+            [type] => RSS
+            [id] => 1245523678
+            [op] => +
+            [circle] => */30 * * * *
+            [url] =>
+        )
+
+    [Task1245523679] => Array
+        (
+            [type] => CMD
+            [id] => 1245523679
+            [op] => +
+            [month] => *
+            [day] => *
+            [week] => *
+            [hour] => *
+            [minute] => *
+            [cmd] =>
+        )
+
+)
