@@ -99,17 +99,8 @@ void deal_content(char (*content)[MAXLINE],int* line,DIR* dp,struct dirent* dirp
                     strcat(cmd,id);
                     break;
                 }
-<<<<<<< HEAD:api/core.c
-                strcat(cmd,buffer);
-                //printf("%s\n",cmd);
-                //format(cmd,date,buffer,id);
-                //fscanf(fptr,") [do] => ");
-                //fgets(buffer,MAXLINE,fptr);
-                fscanf(fptr," ) ");
-=======
                 strcat(cmd,"\n");
                 fscanf(fptr,") ");
->>>>>>> hung:api/core.c
                 switch(option){
                 case '+': // add
                     for(i=0;i<(*line);i++)
