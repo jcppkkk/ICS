@@ -1,19 +1,5 @@
 Array
 (
-<<<<<<< HEAD:api/task
-    [Task1] => Array
-        (
-            [type] => RSS
-            [id] => 16783437
-            [op] => +
-            [circle] => */30 * * * *
-            [url] => www.yahoo.com.tw
-        )
-    [Task2] => Array
-        (
-            [type] => CMD
-            [id] => 1548784
-=======
     [Task1234657897] => Array
         (
             [type] => RSS
@@ -26,16 +12,12 @@ Array
         (
             [type] => CMD
             [id] => 123457897
->>>>>>> che:api/task
             [op] => +
             [month] => *
             [day] => *
             [week] => *
             [hour] => *
             [minute] => *
-<<<<<<< HEAD:api/task
-            [cmd] => ./a
-=======
             [cmd] => ls > QQ
         )
     [Task1234657897] => Array
@@ -44,7 +26,6 @@ Array
             [id] => 132456756
             [op] => +
             [search] => texxxxt+2009-06-17&aq=f
->>>>>>> che:api/task
         )
 )
 

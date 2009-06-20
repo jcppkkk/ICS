@@ -6,7 +6,8 @@
 #include <dirent.h>
 #include <errno.h>
 
-#define MAXLINE 80
+#define MAXLINE 1024
+#define CMD_LINE 2000
 #define MAX_SCHEDULER 200
 #define IDSIZE 20
 #define bool  int
@@ -15,9 +16,9 @@
 #define YOU 100
 #define CMD 101
 #define RSS 102
-#define YOUTUBE_FORMAT "* * */2 * * "
+#define YOUTUBE_FORMAT "* * * * * "
 
-static const char* dirname = "../coretask";
+static const char* dirname = "../../coretask";
 static const char* tmp_filename = "crontab.sh";
 
 void err_sys(){
@@ -34,7 +35,7 @@ void deal_content(char (*content)[MAXLINE],int* line,DIR* dp,struct dirent* dirp
     if(dirp==NULL) return;
     else{
         FILE* fptr;
-        char buffer[MAXLINE],cmd[MAXLINE]={0};
+        char buffer[MAXLINE],cmd[CMD_LINE]={0};
         char filename[MAXLINE];
         char id[IDSIZE];
         int i,n;
@@ -53,6 +54,7 @@ void deal_content(char (*content)[MAXLINE],int* line,DIR* dp,struct dirent* dirp
                 fscanf(fptr,"( [type] => %s ",buffer);
                 fscanf(fptr,"[id] => %s ",id);
                 fscanf(fptr,"[op] => %c ",&option);
+                //get time format
                 if(strcmp(buffer,"RSS")==0){
                     type = RSS;
                     fscanf(fptr,"[circle] => ");
@@ -75,12 +77,27 @@ void deal_content(char (*content)[MAXLINE],int* line,DIR* dp,struct dirent* dirp
                     strcat(cmd,YOUTUBE_FORMAT);
                 }else
                     err_quit("unkown cmd");
-                strcat(cmd,"cd $ICSHOME; ");
+                // get home directory
+                switch(type){
+                case YOU:
+                    strcat(cmd,"cd $ICSHOME/YOUTUBE; ");
+                    break;
+                case RSS:
+                    strcat(cmd,"cd $ICSHOME/RSS; ");
+                    break;
+                case CMD:
+                    sprintf(buffer,"cd $ICSDATA; mkdir %s; cd %s; ",id,id);
+                    strcat(cmd,buffer);
+                    break;
+                }
+                // get comment
                 switch(type){
                 case YOU:
                     strcat(cmd,"./youtube ");
                     fscanf(fptr,"[search] => %s ",buffer);
+                    strcat(cmd,"\"");
                     strcat(cmd,buffer);
+                    strcat(cmd,"\"");
                     strcat(cmd," ");
                     strcat(cmd,id);
                     break;
@@ -94,7 +111,9 @@ void deal_content(char (*content)[MAXLINE],int* line,DIR* dp,struct dirent* dirp
                 case RSS:
                     strcat(cmd,"./rss ");
                     fscanf(fptr,"[url] => %s ",buffer);
+                    strcat(cmd,"\"");
                     strcat(cmd,buffer);
+                    strcat(cmd,"\"");
                     strcat(cmd," ");
                     strcat(cmd,id);
                     break;

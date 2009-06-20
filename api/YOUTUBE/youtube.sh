@@ -1,8 +1,8 @@
 #!bin/bash
 
-DIR="data/$3"
+DIR="../../data/$3"
 
-temp=`grep fullscreenUrl data/$3/page/$1`
+temp=`grep fullscreenUrl ../../data/$3/page/$1`
 temp=`echo ${temp} | sed -n 's/ //gp'`
 AVI_ID_1=`echo ${temp#*video_id=} | cut -d \& -f 1`
 AVI_ID_2=`echo ${temp#*&t=} | cut -d \& -f 1`

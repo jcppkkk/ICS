@@ -1,41 +1,23 @@
 Array
 (
-<<<<<<< HEAD:api/task
-    [Task1] => Array
-        (
-            [type] => RSS
-            [id] => 16783437
-            [op] => +
-            [circle] => */30 * * * *
-            [url] => www.yahoo.com.tw
-        )
-    [Task2] => Array
-        (
-            [type] => CMD
-            [id] => 1548784
-=======
     [Task1234657897] => Array
         (
             [type] => RSS
             [id] => 13246767897
             [op] => +
-            [circle] => */30 * * * *
-            [url] => fghjhe(*^lkb23gf
+            [circle] => * * * * *
+            [url] => http://tw.news.yahoo.com/rss/society
         )
     [Task1234687657] => Array
         (
             [type] => CMD
             [id] => 123457897
->>>>>>> che:api/task
             [op] => +
             [month] => *
             [day] => *
             [week] => *
             [hour] => *
             [minute] => *
-<<<<<<< HEAD:api/task
-            [cmd] => ./a
-=======
             [cmd] => ls > QQ
         )
     [Task1234657897] => Array
@@ -43,8 +25,7 @@ Array
             [type] => YOU
             [id] => 132456756
             [op] => +
-            [search] => texxxxt+2009-06-17&aq=f
->>>>>>> che:api/task
+            [search] => %E6%88%91%E6%84%9B%E9%BB%91%E6%BE%80%E6%9C%83+2009-06-17
         )
 )
 

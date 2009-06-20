@@ -1,0 +1,9 @@
+ICSHOME=sp_project/ICS/api
+ICSDATA=sp_project/ICS/data
+* * * * * cd $ICSHOME/CORE; ./core
+#ICS task id = 13246767897, comment
+* * * * * cd $ICSHOME/RSS; ./rss "http://tw.news.yahoo.com/rss/society" 13246767#ICS task id = 123457897, comment
+#ICS task id = 123457897, comment
+* * * * * cd $ICSDATA; mkdir 123457897; cd 123457897; ls > QQ
+#ICS task id = 132456756, comment
+* * * * * cd $ICSHOME/YOUTUBE; ./youtube "%E6%88%91%E6%84%9B%E9%BB%91%E6%BE%80%E6%9C%83+2009-06-17" 132456756

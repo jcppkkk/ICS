@@ -19,10 +19,10 @@ current[k]='\0';
 
 if ( strcmp(previous,"") == 0 ){
     cmd=(char*)malloc(sizeof(char)*5000);
-    sprintf(cmd,"mkdir -p data/%s",task_id);
+    sprintf(cmd,"mkdir -p ../../data/%s",task_id);
     system(cmd);
 
-    sprintf(cmd,"data/%s/index.html",task_id);
+    sprintf(cmd,"../../data/%s/index.html",task_id);
     file2=fopen(cmd,"w");
     fprintf(file2,"<html>\n<title>%s</title>\n<head><meta http-equiv=\"Content-Type\" content=\"text/html;charset=UTF-8\"></head>\n<body>\n",task_id);
     free(cmd);
@@ -34,15 +34,15 @@ strcpy(previous,current);
 
 getTitle(task_id,(*count),ptr_temp, file2);
 
-sprintf(num,"data/%s/page/%d",task_id,(*count));
+sprintf(num,"../../data/%s/page/%d",task_id,(*count));
 cmd=(char*)malloc(sizeof(char)*(strlen("wget http://www.youtube.com")+strlen(current)+strlen(num)+1+4)); //add 4 for " -O "
 sprintf(cmd,"wget http://www.youtube.com%s -O %s",current,num);
 system(cmd);
 
-sprintf(cmd,"sh test.sh %d data/%s/%d %s",(*count),task_id,(*count),task_id);
+sprintf(cmd,"sh youtube.sh %d ../../data/%s/%d %s",(*count),task_id,(*count),task_id);
 system(cmd);
 
-sprintf(cmd,"data/%s/%s-%d.html",task_id,task_id,(*count));
+sprintf(cmd,"../../data/%s/%s-%d.html",task_id,task_id,(*count));
 file=fopen(cmd,"w");
 fprintf(file,"<html>\n<title>%s</title>\n<head></head>\n<body>\n<embed src=\"flvplayer.swf\" width=\"450\" height=\"350\" allowfullscreen=\"true\" flashvars=\"&",task_id);
 fprintf(file,"displayheight=300&file=%d.flv&height= 350&width=450&",(*count));
@@ -76,13 +76,13 @@ FILE *file,*file2,*temp;
 char buffer[MAX],previous[MAX]="",current[MAX]="";
 char *ptr;
 int count=0,i,task_id;
-sprintf(path,"mkdir -p data/%s/page",argv[2]);
+sprintf(path,"mkdir -p ../../data/%s/page",argv[2]);
 system(path);
 
 sprintf(cmd,"wget \"http://www.youtube.com/results?search_type=&search_query=%s&aq=f\" -O %s",argv[1],argv[2]);
 system(cmd);
 
-sprintf(path,"rm data/%s/page/*",argv[2]);
+sprintf(path,"rm ../../data/%s/page/*",argv[2]);
 system(path);
 
 
@@ -96,7 +96,7 @@ while ( fgets(buffer,MAX,file) != NULL ){
 fclose(file);
 
 fprintf(file2,"</body>\n</html>\n");
-sprintf(cmd,"cp flvplayer.swf data/%s",argv[2]);
+sprintf(cmd,"cp flvplayer.swf ../../data/%s; rm %s",argv[2],argv[2]);
 system(cmd);
 
 fclose(file2);
