@@ -6,16 +6,19 @@
         <title>test</title>
 
         <link rel="stylesheet" type="text/css" href="php/style.css" /></link>
-<script type="text/javascript" src="php/js/jquery-1.3.2.min.js"></script>
-<script type="text/javascript" src="php/js/jquery.validate.js"></script>
-<script type="text/javascript" src="php/js/jquery.form.js"></script>
+<script src="php/js/jquery-1.3.2.min.js"></script>
+<script src="php/js/jquery.validate.js"></script>
+<script src="php/js/jquery.form.js"></script>
+<script src="php/js/jquery.pageslide-0.2.js"></script>
 <script type="text/javascript">
-$().ready(function() {
+$(document).ready(function() {
     // start add row
     //addRow("you");
     $("#TASKS").hide();
+    $("#TASKS").find("#op").val("=");
     $("#TASKS select,#TASKS input:text").each(function(){
         $(this).val($(this).attr("val"));
+        $(this).attr("disabled", "disabled");
     });
     //$("#TASKS input").each(function(){
     //    $(this).val($(this).attr("val"));
@@ -42,11 +45,19 @@ $().ready(function() {
     });
 
     // DELETE TASKS
-    $(":input[value=delete]").live("click" ,function(){
+    $(":input[button=delete]").live("click" ,function(){
         $(this).parent().parent().fadeOut(250, function() {
             $(this).find("#op").val("-");
             two_color();
         });
+    });
+
+    // Modify TASKS
+    $(":input[button=modify]").live("click" ,function(){
+        $(this).parent().parent().find("select, input:text").each(function(){
+            $(this).removeAttr("disabled");
+        });
+        $(this).parent().parent().find("#op").val("!");
     });
 
     // AJAX POST framwork
@@ -83,6 +94,18 @@ $().ready(function() {
         });
         $.post('php/cache.php',{ text: $("#TASKS tbody").html() }, function(txt){});
     }
+    $('a.help').pageSlide({
+        width: "300px",
+            duration: "fast"
+    });
+    $('a.help-long').pageSlide({
+        width: "600px"
+    });
+    $('a.help-full').pageSlide({
+        width: "100%",
+            duration: 1000
+    });
+
 });
 
 </script>
@@ -99,6 +122,7 @@ $().ready(function() {
 <button id="add" value="cmd">新增 自訂命令</button>
 <button id="add" value="rss">新增 RSS訂閱</button>
 <button id="add" value="you">新增 youtube訂閱</button>
+<a class="help-long" href="QQ.html">Normal Long Pageslide</a>
 <form id="input_form" class="cmxform" method="post" action="php/commit.php">
     <table id="TASKS">
         <tbody>
@@ -117,7 +141,6 @@ if($CACHE != null){
         </tfoot>
     </table>
 </form>
-<div class="message"></div>
 
 <textarea style="display:none" id="template-cmd">
     <tr id="task_tr">
@@ -152,7 +175,8 @@ if($CACHE != null){
             </fieldset>
         </td>
         <td>
-            <input  value="delete" type="button">
+            <input button="delete" value="刪除" type="button"><br>
+            <input button="modify" value="修改" type="button">
         </td>
     </tr>
 </textarea>
@@ -179,7 +203,8 @@ if($CACHE != null){
             </fieldset>
         </td>
         <td>
-            <input  value="delete" type="button">
+            <input button="delete" value="刪除" type="button"><br>
+            <input button="modify" value="修改" type="button">
         </td>
     </tr>
 </textarea>
@@ -202,7 +227,8 @@ if($CACHE != null){
             </fieldset>
         </td>
         <td>
-            <input  value="delete" type="button">
+            <input button="delete" value="刪除" type="button"><br>
+            <input button="modify" value="修改" type="button">
         </td>
     </tr>
 </textarea>
