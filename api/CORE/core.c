@@ -58,6 +58,10 @@ void deal_content(char (*content)[MAXLINE],int* line,DIR* dp,struct dirent* dirp
                 if(option=='='){
                     fscanf(fptr,") ");
                     continue;
+                }else if(option=='-' && fgetc(fptr)==')'){
+                    fseek(fptr,-1,SEEK_CUR);
+                    fscanf(fptr,") ");
+                    continue;
                 }
                 //get time format
                 if(strcmp(buffer,"RSS")==0){
@@ -103,6 +107,8 @@ void deal_content(char (*content)[MAXLINE],int* line,DIR* dp,struct dirent* dirp
                 case YOU:
                     strcat(cmd,"./youtube ");
                     fscanf(fptr,"[search] => %s ",buffer);
+                    if(strcmp(buffer,")")==0)
+                        continue;
                     strcat(cmd,"\"");
                     strcat(cmd,buffer);
                     strcat(cmd,"\" ");
@@ -113,6 +119,8 @@ void deal_content(char (*content)[MAXLINE],int* line,DIR* dp,struct dirent* dirp
                     fscanf(fptr,"[cmd] => ");
                     strcpy(buffer,"(");
                     fgets(buffer+1,MAXLINE,fptr);
+                    if(strcmp(buffer,"()\n")==0)
+                        continue;
                     buffer[strlen(buffer)-1] = ')';
                     buffer[strlen(buffer)] = '\0';
                     fscanf(fptr," ");
@@ -122,6 +130,8 @@ void deal_content(char (*content)[MAXLINE],int* line,DIR* dp,struct dirent* dirp
                 case RSS:
                     strcat(cmd,"./rss ");
                     fscanf(fptr,"[url] => %s ",buffer);
+                    if(strcmp(buffer,")")==0)
+                        continue;
                     strcat(cmd,"\"");
                     strcat(cmd,buffer);
                     strcat(cmd,"\" ");
@@ -149,6 +159,17 @@ void deal_content(char (*content)[MAXLINE],int* line,DIR* dp,struct dirent* dirp
                         }
                     break;
                 case '!': // modify
+                    for(i=1;i<(*line);i++){
+                        if(sscanf(content[i],"#ICS task id = %s, comment ",buffer)){
+                            buffer[strlen(buffer)-1]='\0';
+                            if(strcmp(buffer,id)==0){
+                                content[i][0] = content[i+1][0] = '\0';
+                                snprintf(content[(*line)++],MAXLINE,"#ICS task id = %s, comment\n",id);
+                                strcpy(content[(*line)++],cmd);
+                                break;
+                            }
+                        }
+                    }
                     break;
                 default:
                     err_quit("unkown option");
