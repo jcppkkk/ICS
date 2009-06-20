@@ -106,10 +106,10 @@ else{
    fprintf(stderr,"error rss tag! \n");
    exit(1);
 }
-buffer=(char*)malloc(strlen("mkdir -p")+(strlen("data//index.html")+strlen(taskid)+1)*sizeof(char));
-sprintf(buffer,"mkdir -p data/%s",taskid);
+buffer=(char*)malloc(strlen("mkdir -p")+(strlen("../../data//index.html")+strlen(taskid)+1)*sizeof(char));
+sprintf(buffer,"mkdir -p ../../data/%s",taskid);
 system(buffer);
-sprintf(buffer,"data/%s/index.html",taskid);
+sprintf(buffer,"../../data/%s/index.html",taskid);
 
 if ( (file=fopen(buffer,"w")) == NULL ) fprintf(stderr,"file can't be opened!\n");
 fcntl(fileno(file), F_GETLK, &lockp);
