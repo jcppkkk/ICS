@@ -11,18 +11,18 @@
 <script src="php/js/jquery.form.js"></script>
 <script type="text/javascript">
 $(document).ready(function() {
+    var i = <?php echo time(); ?>;
     // start add row
-    //$("#TASKS").hide();
+    $("#TASKS").hide();
 
     $("#TASKS select,#TASKS input:text, input.submit").each(function(){
         $(this).val($(this).attr("val"));
         $(this).attr("disabled", "disabled");
     });
 
-    //$("#TASKS").show("slow");
+    $("#TASKS").show();
 
 
-    var i = <?php echo time(); ?>;
 
     function addRow(type) {
         var template = jQuery.format($("#template-"+type, null).val());
@@ -57,10 +57,11 @@ $(document).ready(function() {
     // DELETE TASKS
     $(":input[button=delete]").live("click" ,function(){
         $(this).parent().parent().fadeOut(250, function() {
-            if($(this).find("#op").val()=="+")
+            if($(this).find("#op").val()=="+"){
                 $(this).remove();
-            else
-                $(this).find("#op").val("-");
+            } else {
+                $(this).find("#op").attr("value","-");
+            }
             two_color();
         });
     });
@@ -87,11 +88,9 @@ $(document).ready(function() {
         // var formElement = jqForm[0];
         while($("#legendBOX").length)
         {
-            $("#legendBOX").each(function(){
-                $text = $(this).val();
-                $(this).parent().html($text);
-                //$(this).remove();
-            });
+            $BOX = $("#legendBOX");
+            $text = $BOX.val();
+            $BOX.parent().html($text);
         }
         //var queryString = $.param(formData);
         //alert('About to submit: \n\n' + queryString);
@@ -123,7 +122,9 @@ $(document).ready(function() {
 
         $(":input[button=rename]").removeAttr("disabled");
 
-        $("#TASKS").find("#op").val("=");
+        $("#TASKS").find("#op").each(function(){
+            $(this).attr("value","=");
+        });
 
         /* post cache */
         $.post('php/cache.php',{ text: $("#TASKS tbody").html() }, function(txt){ });
