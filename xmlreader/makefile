@@ -1,2 +1,2 @@
-a.out:
-	gcc -o  a.out `pkg-config --cflags --libs libxml-2.0` xmlreader.c
+rss:
+	gcc -o  rss `pkg-config --cflags --libs libxml-2.0` xmlreader.c
