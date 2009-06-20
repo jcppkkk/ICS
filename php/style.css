@@ -1,10 +1,10 @@
-.td_pad {
-    padding:5px 5px;
+#td {
+    padding:10px 5px;
     vertical-align:center;
     text-align:left;
-    width: 600px;
 }
 
-#task_tr {
+
+.td_input {
     width: 500px;
 }
